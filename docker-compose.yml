@@ -1,0 +1,9 @@
+services:
+  nextjs:
+    build:
+      dockerfile: Dockerfile
+    container_name: nextjs
+    environment:
+      - NODE_ENV=development  # Set environment variables for testing
+    ports:
+      - "3000:3000"  # Expose different port for local testing
