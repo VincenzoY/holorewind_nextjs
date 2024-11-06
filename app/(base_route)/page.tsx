@@ -26,7 +26,7 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full h-full mt-40 flex items-center justify-center md:h-lvh md:mt-0">
+    <div className="w-full flex items-center justify-center h-lvh">
       <div className="flex flex-col items-center gap-8 w-full">
           {<div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>}
           {/*<MainLogo />*/}

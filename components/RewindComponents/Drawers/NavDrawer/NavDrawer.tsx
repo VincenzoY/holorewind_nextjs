@@ -30,10 +30,10 @@ const NavDrawer: React.FC<NavDrawerProps> = () => {
                         2024 Rewind
                     </div>
                 </Link>
-                <div className="border-solid border-b-2 border-b-page-white p-4" onClick={() => NiceModal.show(HelpDrawer)}>
+                <div className="border-solid border-b-2 border-b-page-white p-4 cursor-pointer" onClick={() => NiceModal.show(HelpDrawer)}>
                     Help
                 </div>
-                <div className="border-solid border-b-2 border-b-page-white p-4" onClick={() => NiceModal.show(CreditsDrawer)}>
+                <div className="border-solid border-b-2 border-b-page-white p-4 cursor-pointer" onClick={() => NiceModal.show(CreditsDrawer)}>
                     Credits
                 </div>
             </div>
