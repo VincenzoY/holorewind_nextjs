@@ -87,14 +87,13 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 <div className='flex justify-around'>
                                     {
                                         watchTimePerChannel.slice(0, 3).map((item, index) => {
-                                            return <>
-                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                            return (
                                                 <img 
                                                     src={item.channel.photo}
                                                     className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${item.channel.name}`}
                                                     key={item.channel.channel_id}
                                                 />
-                                            </>
+                                            )
                                         })
                                     }
                                 </div>
@@ -155,7 +154,11 @@ async function copyToClipboard(text: string) {
 }
 
 function getRewindUrl(rewindId: string) {
-    return `${window.location.host}/rewind/${rewindId}`
+    return (
+        process.env.NODE_ENV === "production" ? 
+        `https://${window.location.host}/rewind/${rewindId}` :
+        `http://${window.location.host}/rewind/${rewindId}`
+    )
 }
 
 function downloadImage(data: string, filename = 'holorewind.png') {

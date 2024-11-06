@@ -15,14 +15,13 @@ export default function RewindOpenGraphImage({rewind}: RewindOpenGraphImageProps
                 <div className='flex flex-col justify-between'>
                     {
                         watchTimePerChannel.slice(0, 3).map((item) => {
-                            return <>
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                            return (
                                 <img 
                                     src={item.channel.photo}
                                     className="w-52 rounded-md" alt={`Photo for ${item.channel.name}`}
                                     key={item.channel.channel_id}
                                 />
-                            </>
+                            )
                         })
                     }
                 </div>
