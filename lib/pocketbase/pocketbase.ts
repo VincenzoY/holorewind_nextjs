@@ -48,10 +48,13 @@ export interface TypedPocketBase extends PocketBase {
     collection(idOrName: 'rewinds'): RecordService<RewindDBEntry>
 }
 
-//console.log("aaa")
-//console.log(process.env.NODE_ENV)
+const POCKETBASE_ADDRESS = (
+    process.env.NODE_ENV === "production" ? 
+    "https://backend.holorewind.com" :
+    "https://127.0.0.1:8090"
+)
 
-const pb = new PocketBase("https://backend.holorewind.com") as TypedPocketBase;
+const pb = new PocketBase(POCKETBASE_ADDRESS) as TypedPocketBase;
 
 export default pb
 
