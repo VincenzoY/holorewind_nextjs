@@ -28,10 +28,7 @@ export default function RewindOpenGraphImage({rewind}: RewindOpenGraphImageProps
                     }
                 </div>
                 <div className='flex flex-col gap-4 w-full h-full'>
-                    <div className="flex justify-between">
-                        <h2 className="text-9xl font-bold">HoloRewind</h2>
-                        <Logo />
-                    </div>
+                    <h2 className="text-9xl font-bold">HoloRewind</h2>
                     <div className='h-3 w-full bg-slate-500 shrink-0'/>
                     <div className="flex justify-between items-center">
                         <h2 className="text-5xl font-bold"><b className="font-bold text-7xl text-ame-gold">{uniqueViews}</b> videos</h2>
