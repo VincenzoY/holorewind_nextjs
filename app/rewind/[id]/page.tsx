@@ -23,7 +23,7 @@ export async function generateMetadata(
    
     return {
       openGraph: {
-        title: `My ${year + " " || ""}HoloLive EN Rewind`,
+        title: `My ${year + " " || ""}HoloLive Rewind`,
         description: "This is who I was watching this year. Find yours too!",
         images: [photoUrl],
       },
