@@ -51,12 +51,12 @@ const MainLogo: React.FC<MainLogo> = ({logoDistance = 3500}) => {
     const beta = windowSize.x > 1920 ? Math.tan(mousePosition.y / logoDistance) : 0
     const rotation_vector = mousePosition.x / logoDistance
 
-    const brightness = windowSize.x > 1920 ? (Math.sin(coords.x / 400) + 1 + Math.cos(coords.y / 400) + 1) * 5 + 90 : 125
+    const brightness = windowSize.x > 1920 ? (Math.sin(coords.x / 400) + 1 + Math.cos(coords.y / 400) + 1) * 8 + 90 : 125
 
     return (
         <div className={css.x_rotation} style={{"--alpha": `${alpha}rad`} as CustomCSSProperties}>
             <div className={css.y_rotation} style={{"--beta": `${beta}rad`, "--rotation_vector": `${rotation_vector}`} as CustomCSSProperties}>
-                <div className="text-6xl md:text-9xl">
+                <div className="text-6xl md:text-9xl text-page-white">
                     <span className={css.noise} style={{"--brightness": `${brightness}%`} as CustomCSSProperties}>Holo</span><span>Rewind</span>
                 </div>
             </div>
