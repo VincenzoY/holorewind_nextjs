@@ -11,6 +11,7 @@ import { formatWatchHistory } from "@/lib/watch_history/watch_history";
 import NiceModal from "@ebay/nice-modal-react";
 import GuideDrawer from "@/components/RewindComponents/Drawers/GuideDrawer/GuideDrawer";
 import Link from "next/link";
+import MainLogo from "@/components/Icons/MainLogo/MainLogo";
 
 export default function Page() {
   const [, setRewindId] = useLocalStorage<string>("rewindId")
@@ -28,8 +29,8 @@ export default function Page() {
   return (
     <div className="w-full flex items-center justify-center h-dvh">
       <div className="flex flex-col items-center gap-8 w-full">
-          <div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>
-          {/*<MainLogo />*/}
+          {/*<div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>*/}
+          {<MainLogo />}
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               <div>
                   <Button onClick={() => fileUploadRef.current?.click()} className="w-[200px] md:w-auto">

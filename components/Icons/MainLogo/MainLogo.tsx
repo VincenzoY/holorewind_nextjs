@@ -65,6 +65,7 @@ const MainLogo: React.FC<MainLogo> = ({logoDistance = 3500}) => {
 }
 
 function getWindowSize() {
+    if(typeof window === 'undefined') { return {x: 0, y: 0 }}
     const {innerWidth, innerHeight} = window;
     return {x: innerWidth, y: innerHeight};
 }

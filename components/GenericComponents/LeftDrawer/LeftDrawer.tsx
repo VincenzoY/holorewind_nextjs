@@ -27,7 +27,7 @@ const LeftDrawer: React.FC<LeftDrawerProps> = ({
             { state => (
                 <div 
                     className={`
-                        fixed top-0 bottom-0 w-full h-full z-20 
+                        fixed top-0 bottom-0 w-full h-dvh z-20 
                         transition-colors duration-300 ease-in-out
                         ${stateType(state) === "enter" ? "bg-[#00000066]" : "bg-[#00000000]"}
                     `}
