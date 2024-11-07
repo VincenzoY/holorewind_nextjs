@@ -25,7 +25,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
                             Video Recap for YouTube
                         </Link>. However, I have limited my focus to Hololive/VTubers
                         which allows for a more personalized and slightly more accurate recap.
-                        Definitely check out their site if you're interested.
+                        Definitely check out their site if you are interested.
                     </p>
                     <p className="text-md">
                         Thanks to {" "}
