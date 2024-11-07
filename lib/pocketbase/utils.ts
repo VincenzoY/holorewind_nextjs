@@ -1,4 +1,4 @@
-import pb, { Channel, PAGE_SIZE, Rewind, RewindDBEntry, Video, createRecordInCollection } from "./pocketbase"
+import pb, { Channel, PAGE_SIZE, RewindDBEntry, Video, createRecordInCollection } from "./pocketbase"
 
 
 export async function fetchVideoByVideoIds(videoIds: Array<string>): Promise<Record<string, Video>> {
@@ -13,6 +13,36 @@ export async function fetchVideoByVideoIds(videoIds: Array<string>): Promise<Rec
         const videoDBRecords = (await pb.collection("videos").getList(1, PAGE_SIZE, {
             filter: page.map((id) => `video_id="${id}"`).join("||")
         }))["items"]
+
+        videoDBRecords.forEach((videoDBRecord) => {
+            const {id, collectionName, collectionId, updated, created, ...video} = videoDBRecord
+            videos[video.video_id] = video
+        })
+    }
+
+    return videos
+}
+
+export async function fetchVideosByVideoIdsInParallel(videoIds: Array<string>): Promise<Record<string, Video>> {
+    const videos: Record<string, Video> = {}
+    const requests = []
+    
+    let pageNum = 0
+    let page = videoIds.slice(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE)
+    for(; 
+        page.length > 0; 
+        pageNum += 1, page = videoIds.slice(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE)
+    ) {
+        requests.push(pb.collection("videos").getList(1, PAGE_SIZE, {
+            filter: page.map((id) => `video_id="${id}"`).join("||"),
+            requestKey: null
+        }))
+    }
+
+    const responses = await Promise.all(requests)
+
+    for(const response of responses) {
+        const videoDBRecords = response["items"]
 
         videoDBRecords.forEach((videoDBRecord) => {
             const {id, collectionName, collectionId, updated, created, ...video} = videoDBRecord

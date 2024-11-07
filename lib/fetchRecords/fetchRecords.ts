@@ -1,7 +1,7 @@
 import type { Video, Channel, VideoWithChannel } from "@/lib/pocketbase/pocketbase"
 import { fetchAllRecordsInCollection } from "@/lib/pocketbase/pocketbase"
 import { FormattedWatchHistory } from "../watch_history/watch_history"
-import { fetchChannelByChannelIds, fetchVideoByVideoIds } from "../pocketbase/utils"
+import { fetchChannelByChannelIds, fetchVideosByVideoIdsInParallel } from "../pocketbase/utils"
 
 export interface VideoWatchHistory {
     watchHistory: Array<[string, string]>,
@@ -46,7 +46,7 @@ export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory)
         return true
     })
 
-    const videos = await fetchVideoByVideoIds(filteredVideoIds)
+    const videos = await fetchVideosByVideoIdsInParallel(filteredVideoIds)
 
     for(const videoId in videos) {
         const video = videos[videoId]
