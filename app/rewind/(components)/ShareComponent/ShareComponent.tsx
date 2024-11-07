@@ -11,6 +11,7 @@ import RewindOpenGraphImage from '../RewindOpenGraphImage/RewindOpenGraphImage';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import Logo from '@/components/Icons/Logo/Logo';
 
 interface ShareComponentProps {
     rewindId?: string
@@ -67,7 +68,10 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     <div ref={fileRef}>
                         <BlankFile>
                             <div className='flex flex-col gap-2'>
-                                <h2 className="text-2xl font-bold">HoloRewind</h2>
+                                <div className='flex justify-between items-center'>
+                                    <h2 className="text-2xl font-bold">HoloRewind</h2>
+                                    <Logo className="w-16"/>
+                                </div>
                                 <div className='h-1 bg-slate-800'/>
                                 <div className='flex flex-col items-center'>
                                     <h2 className="text-xl font-bold"><b className="font-bold text-4xl text-ame-gold">{uniqueViews}</b> videos</h2>

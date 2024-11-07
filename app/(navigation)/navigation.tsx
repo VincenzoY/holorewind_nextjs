@@ -23,7 +23,7 @@ export default function Navigation() {
                             className="inline-flex items-center justify-center" 
                             onClick={() => NiceModal.show(NavDrawer)}
                         >
-                            <BarsIcon width={24} height={24} className="fill-page-white"/>
+                            <BarsIcon width={24} height={24} className="fill-ame-gold"/>
                         </button>
                     </div>
                     <div className="hidden lg:flex lg:gap-x-12 lg:items-center">

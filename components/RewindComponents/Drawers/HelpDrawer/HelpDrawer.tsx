@@ -14,14 +14,14 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                 <div className="flex flex-col gap-4">
                     <p className="text-md">
                         If you have any issues, send me a message {" "}
-                        <Link href="https://x.com/yuuyuu988988">
-                            @yuuyuu988988
+                        <Link href="https://x.com/yuyu933933" target="blank">
+                            @yuyu933933
                         </Link> and I&apos;ll try to help you out.
                     </p>
                     <p className="text-md">
                         The watch history data is provided by YouTube/Google and can be missing some information/views,
                         making some attributes slightly inaccurate. 
-                        (I usually find that the older the data gets, the more records it may be missing).
+                        (I usually find that the older the timeframe gets, the more records it may be missing).
                     </p>
                     <p className="text-md">
                         Your watch history data is not stored unless you explicitly create a shareable rewind.

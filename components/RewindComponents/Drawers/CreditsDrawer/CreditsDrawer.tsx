@@ -13,31 +13,31 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
             <div className="p-8 text-page-white overflow-scroll flex flex-col h-full no-scrollbar">
                 <div className="flex flex-col gap-4">
                     <p className="text-md">
-                        This is a fan made website and is in no way affiliated with Cover Corp. 
+                        This is a fan made website and is not affiliated with Cover Corp. 
                         This site follows the guidelines set by Cover Corp&apos;s {" "}
-                        <Link href="https://hololivepro.com/en/terms/">
+                        <Link href="https://hololivepro.com/en/terms/" target="blank">
                             Derivative Works Guidelines
                         </Link>
                     </p>
                     <p className="text-md">
                         This site was inspired by Anthony Teo&apos;s {" "}
-                        <Link href="https://videorecap.viewodyssey.com/">
+                        <Link href="https://videorecap.viewodyssey.com/" target="blank">
                             Video Recap for YouTube
                         </Link>. However, I have limited my focus to Hololive/VTubers
                         which allows for a more personalized and slightly more accurate recap.
-                        Definitely check out their site if interested.
+                        Definitely check out their site if you're interested.
                     </p>
                     <p className="text-md">
                         Thanks to {" "}
-                        <Link href="https://holodex.net/">
+                        <Link href="https://holodex.net/" target="blank">
                             Holodex
                         </Link> as this project wouldn&apos;t be possible without their API. 
                         (I didn&apos;t know going in how restrictive YouTube&apos;s API would be)
                     </p>
                     <p className="text-md">
                         Made by {" "}
-                        <Link href="https://x.com/yuuyuu988988">
-                            @yuuyuu988988
+                        <Link href="https://x.com/yuyu933933" target="blank">
+                            @yuyu933933
                         </Link>.
                         (You should go follow me :D) 
                     </p>

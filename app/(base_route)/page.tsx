@@ -28,7 +28,7 @@ export default function Page() {
   return (
     <div className="w-full flex items-center justify-center h-dvh">
       <div className="flex flex-col items-center gap-8 w-full">
-          {<div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>}
+          <div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>
           {/*<MainLogo />*/}
           <div className="flex flex-col md:flex-row items-center justify-center gap-4">
               <div>

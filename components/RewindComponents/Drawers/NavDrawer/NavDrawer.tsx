@@ -12,7 +12,7 @@ const NavDrawer: React.FC<NavDrawerProps> = () => {
     const modal = useModal()
 
     const HomeIconLink = (
-        <Link href="/" className="w-16">
+        <Link href="/" className="w-16 ml-2" onClick={modal.hide}>
             <Logo />
         </Link>
     )
