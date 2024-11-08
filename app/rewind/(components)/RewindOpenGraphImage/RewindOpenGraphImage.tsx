@@ -1,5 +1,3 @@
-import Logo from "@/components/Icons/Logo/Logo"
-import MainLogo from "@/components/Icons/MainLogo/MainLogo"
 import { RewindDataType } from "@/lib/rewind/rewind"
 
 interface RewindOpenGraphImageProps {
