@@ -7,11 +7,10 @@ import BlankFile from '@/components/RewindComponents/BlankFile/BlankFile';
 import { toPng } from 'html-to-image'
 import DownloadIcon from '@/components/Icons/DownloadIcon/DownloadIcon';
 import { createRewind } from '@/lib/pocketbase/utils';
-import RewindOpenGraphImage from '../RewindOpenGraphImage/RewindOpenGraphImage';
+import RewindOpenGraphImage from '../RewindOpenGraphImage/RewindOpenGraphStyleImage';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
-import Logo from '@/components/Icons/Logo/Logo';
 
 interface ShareComponentProps {
     rewindId?: string
@@ -126,7 +125,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     </div>
                 </div>
             </div>
-            <div className='absolute left-[-2000px]'>
+            <div className='absolute'>
                 <div ref={opengraphRef}>
                     <RewindOpenGraphImage rewind={rewindData}/>
                 </div>

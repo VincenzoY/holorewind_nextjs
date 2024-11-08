@@ -4,7 +4,7 @@ import { getRewindPhotoUrl } from "@/lib/pocketbase/utils"
 import RewindComponent from "../(components)/RewindComponent/RewindComponent"
 import { Metadata } from "next/types"
 
-interface PageProps {
+export interface PageProps {
     params: {
         id: string
     }
@@ -25,7 +25,7 @@ export async function generateMetadata(
       openGraph: {
         title: `My ${year + " " || ""}HoloLive Rewind`,
         description: "This is who I was watching this year. Find yours too!",
-        images: [photoUrl],
+        //images: [photoUrl],
       },
     }
 }
