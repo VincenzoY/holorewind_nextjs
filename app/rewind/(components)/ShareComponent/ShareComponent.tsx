@@ -105,36 +105,39 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     </div>
                     <div>
                         <div className='flex flex-col gap-4'>
-                            <button 
-                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
+                            <ShareButton 
                                 disabled={!fileDataUrl}
                                 onClick={() => fileDataUrl && downloadImage(fileDataUrl)}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
-                                    <DownloadIcon width={24} height={24}/> Download
-                                </div>
-                            </button>
-                            <button 
-                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
+                                <DownloadIcon width={24} height={24}/> Download
+                            </ShareButton>
+                            <ShareButton 
                                 onClick={async () => await copyToClipboard(await createRewindUrl())}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
-                                    <LinkIcon width={24} height={24}/> Create Shareable Link
-                                </div>
-                            </button>
-                            <button 
-                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
+                                <LinkIcon width={24} height={24}/> Create Shareable Link
+                            </ShareButton>
+                            <ShareButton 
                                 onClick={shareLinkOnTwitter}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
-                                    <TwitterLogo width={24} height={24}/> Share on Twitter
-                                </div>
-                            </button>
+                                <TwitterLogo width={24} height={24}/> Share on Twitter
+                            </ShareButton>
                         </div>
                     </div>
                 </div>
             </div>
         </>
+    )
+}
+
+const ShareButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+    return (
+        <button 
+            className='
+                p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75
+                flex items-center justify-center text-xl gap-2 fill-ame-gold
+            ' 
+            {...props}
+        />
     )
 }
 
