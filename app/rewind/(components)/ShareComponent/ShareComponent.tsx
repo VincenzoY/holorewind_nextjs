@@ -10,6 +10,7 @@ import { createRewind } from '@/lib/pocketbase/utils';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
+import TwitterLogo from '@/components/Icons/TwitterIcon/TwitterIcon';
 
 interface ShareComponentProps {
     rewindId?: string
@@ -105,28 +106,28 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     <div>
                         <div className='flex flex-col gap-4'>
                             <button 
-                                className='p-2 bg-slate-300 rounded-sm hover:bg-slate-400 transition-colors disabled:bg-slate-500 disabled:cursor-wait' 
+                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
                                 disabled={!fileDataUrl}
                                 onClick={() => fileDataUrl && downloadImage(fileDataUrl)}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2'>
+                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
                                     <DownloadIcon width={24} height={24}/> Download
                                 </div>
                             </button>
                             <button 
-                                className='p-2 bg-slate-300 rounded-sm hover:bg-slate-400 transition-colors disabled:bg-slate-500 disabled:cursor-wait' 
+                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
                                 onClick={async () => await copyToClipboard(await createRewindUrl())}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2'>
+                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
                                     <LinkIcon width={24} height={24}/> Create Shareable Link
                                 </div>
                             </button>
                             <button 
-                                className='p-2 bg-slate-300 rounded-sm hover:bg-slate-400 transition-colors disabled:bg-slate-500 disabled:cursor-wait' 
+                                className='p-2 text-ame-gold rounded-sm transition-colors bg-[#3C3C3C] hover:bg-zinc-600 disabled:bg-zinc-800 disabled:cursor-wait disabled:opacity-75' 
                                 onClick={shareLinkOnTwitter}
                             >
-                                <div className='flex items-center justify-center text-xl gap-2'>
-                                    <LinkIcon width={24} height={24}/> Share on Twitter
+                                <div className='flex items-center justify-center text-xl gap-2 fill-ame-gold'>
+                                    <TwitterLogo width={24} height={24}/> Share on Twitter
                                 </div>
                             </button>
                         </div>
