@@ -17,6 +17,7 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "HoloRewind",
   description: "Create a recap of your Hololive watch history",
+  metadataBase: new URL(process.env.NODE_ENV === "production" ? 'https://holorewind.com' : 'http://localhost:3000'),
 };
 
 export default function RootLayout({

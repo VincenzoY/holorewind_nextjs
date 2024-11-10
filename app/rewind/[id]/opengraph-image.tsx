@@ -2,7 +2,6 @@ import { ImageResponse } from 'next/og'
 import RewindOpenGraphStyleImage from '../(components)/RewindOpenGraphImage/RewindOpenGraphStyleImage'
 import { RewindDBEntry, fetchRecordFromCollectionById } from '@/lib/pocketbase/pocketbase'
 import { PageProps } from './page'
-import { fontRobotoBold, fontRobotoRegular } from '@/app/fonts/fonts'
 import { notFound } from 'next/navigation'
  
 export const runtime = 'edge'
@@ -21,6 +20,14 @@ export default async function Image(
   { params: {id} }: PageProps
 ) {
   const { rewind } = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
+
+  const fontRobotoRegular = fetch(
+    new URL('/app/fonts/Roboto-Regular.ttf', import.meta.url)
+  ).then((res) => res.arrayBuffer())
+
+  const fontRobotoBold = fetch(
+    new URL('./fonts/Roboto-Bold.ttf', import.meta.url)
+  ).then((res) => res.arrayBuffer());
  
   return new ImageResponse(
     <div style={{fontFamily: 'Roboto', display: 'flex'}}>

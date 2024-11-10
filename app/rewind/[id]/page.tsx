@@ -1,6 +1,5 @@
 import { RewindDBEntry, fetchRecordFromCollectionById } from "@/lib/pocketbase/pocketbase"
 import { notFound } from "next/navigation"
-import { getRewindPhotoUrl } from "@/lib/pocketbase/utils"
 import RewindComponent from "../(components)/RewindComponent/RewindComponent"
 import { Metadata } from "next/types"
 
@@ -20,11 +19,9 @@ export async function generateMetadata(
     const year = rewind.year
    
     return {
-      metadataBase: process.env.NODE_ENV === "production" ? new URL('https://holorewind.com') : undefined,
       openGraph: {
         title: `My ${year + " " || ""}HoloLive Rewind`,
         description: "This is who I was watching this year. Find yours too!",
-        //images: [photoUrl],
       },
     }
 }

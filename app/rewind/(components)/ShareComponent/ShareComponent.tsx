@@ -59,12 +59,12 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                         <BlankFile>
                             <div className='flex flex-col gap-2'>
                                 <h2 className="text-2xl font-bold">HoloRewind</h2>
-                                <div className='h-1 bg-slate-800'/>
+                                <div className='h-1 bg-[#3C3C3C]'/>
                                 <div className='flex flex-col items-center'>
                                     <h2 className="text-xl font-bold"><b className="font-bold text-4xl text-ame-gold">{uniqueViews}</b> videos</h2>
                                     <h2 className="text-xl font-bold"><b className="font-bold text-4xl text-ame-gold">{channelCount}</b> channels</h2>
                                 </div>
-                                <div className='h-1 bg-slate-800'/>
+                                <div className='h-1 bg-[#3C3C3C]'/>
                                 <div>
                                     <h3 className="text-md font-bold">Top Channels</h3>
                                     <div className='grid grid-rows-5 grid-cols-2 gap-x-4 mr-2 ml-2'>

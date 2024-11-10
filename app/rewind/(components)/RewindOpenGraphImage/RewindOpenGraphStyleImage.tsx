@@ -26,7 +26,7 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                         })
                     }
                 </div>
-                <div tw='flex flex-col gap-4 h-full w-[1176.8px] ml-8'>
+                <div tw='flex flex-col h-full w-[1176.8px] ml-8'>
                     <h2 tw="text-9xl font-bold">HoloRewind</h2>
                     <div tw='h-3 w-full bg-[#3C3C3C] shrink-0'/>
                     <div tw="flex justify-between items-center">
@@ -44,9 +44,9 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                         </div>
                     </div>
                     <div tw='h-3 w-full bg-[#3C3C3C] shrink-0'/>
-                    <div tw="grow flex flex-col gap-4">
+                    <div tw="grow flex flex-col">
                         <h3 tw="text-4xl font-bold">Top Channels</h3>
-                        <div tw='flex gap-8'>
+                        <div tw='flex'>
                             <ChannelsColumn channels={watchTimePerChannel.filter((_, i) => i % 2 === 0)}/>
                             <ChannelsColumn channels={watchTimePerChannel.filter((_, i) => i % 2 === 1)}/>
                         </div>
