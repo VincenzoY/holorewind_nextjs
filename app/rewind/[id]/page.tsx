@@ -20,7 +20,7 @@ export async function generateMetadata(
     const year = rewind.year
    
     return {
-      metadataBase: new URL('https://holorewind.com'),
+      metadataBase: process.env.NODE_ENV === "production" ? new URL('https://holorewind.com') : undefined,
       openGraph: {
         title: `My ${year + " " || ""}HoloLive Rewind`,
         description: "This is who I was watching this year. Find yours too!",
