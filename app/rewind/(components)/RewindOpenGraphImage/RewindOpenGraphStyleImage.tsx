@@ -6,6 +6,7 @@ interface RewindOpenGraphStyleImageProps {
 }
 
 export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyleImageProps) {
+    const { year } = rewind
     const { uniqueViews, totalViews } = rewind.accumulatedVideoData
     const { channelCount } = rewind.accumulatedChannelData
     const watchTimePerChannel = rewind.specificChannelData.totalWatchTime.slice(0, 10)
@@ -27,7 +28,11 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                     }
                 </div>
                 <div tw='flex flex-col h-full w-[1176.8px] ml-8'>
-                    <h2 tw="text-9xl font-bold">HoloRewind</h2>
+                    <div tw="flex w-full justify-between items-end">
+                        <h2 tw="text-9xl font-bold pr-2">HoloRewind</h2>
+                        {year && <h4 tw="text-3xl font-bold">({year})</h4>}
+                    </div>
+                    
                     <div tw='h-3 w-full bg-[#3C3C3C] shrink-0'/>
                     <div tw="flex justify-between items-center">
                         <div tw="flex items-end">

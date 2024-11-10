@@ -37,15 +37,25 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
         createImages()
     }, [])
 
-    const createRewindLink = async () => {
-        if (!rewindId) {
-            const rewind = await createRewind(rewindData)
-            setRewindId(rewind.id)
-            setStorageRewindId(rewind.id)
-            return await copyToClipboard(getRewindUrl(rewind.id))
-        }
+    const createRewindUrl = async () => {
+        if (rewindId) { return getRewindUrl(rewindId) }
 
-        await copyToClipboard(getRewindUrl(rewindId))
+        const rewind = await createRewind(rewindData)
+        setRewindId(rewind.id)
+        setStorageRewindId(rewind.id)
+        return getRewindUrl(rewind.id)
+    }
+
+    const shareLinkOnTwitter = async () => {
+        const rewindUrl = await createRewindUrl()
+
+        const twitterUrl = new URL("https://twitter.com/intent/tweet")
+        twitterUrl.searchParams.append('text', 'These are the Holo VTubers I was watching this year. Find yours too!')
+        twitterUrl.searchParams.append('hashtags', 'HoloRewind');
+        twitterUrl.searchParams.append('url', rewindUrl);
+
+        const newWindow = window.open(twitterUrl, '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
     }
 
     return (
@@ -105,11 +115,18 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                             </button>
                             <button 
                                 className='p-2 bg-slate-300 rounded-sm hover:bg-slate-400 transition-colors disabled:bg-slate-500 disabled:cursor-wait' 
-                                disabled={!fileDataUrl}
-                                onClick={createRewindLink}
+                                onClick={async () => await copyToClipboard(await createRewindUrl())}
                             >
                                 <div className='flex items-center justify-center text-xl gap-2'>
                                     <LinkIcon width={24} height={24}/> Create Shareable Link
+                                </div>
+                            </button>
+                            <button 
+                                className='p-2 bg-slate-300 rounded-sm hover:bg-slate-400 transition-colors disabled:bg-slate-500 disabled:cursor-wait' 
+                                onClick={shareLinkOnTwitter}
+                            >
+                                <div className='flex items-center justify-center text-xl gap-2'>
+                                    <LinkIcon width={24} height={24}/> Share on Twitter
                                 </div>
                             </button>
                         </div>
