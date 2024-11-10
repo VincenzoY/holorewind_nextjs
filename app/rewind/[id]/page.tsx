@@ -15,11 +15,9 @@ export async function generateMetadata(
 ): Promise<Metadata> {
    
     const rewindDBEntry = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
-    const { rewind, photo } = rewindDBEntry
+    const { rewind } = rewindDBEntry
 
     const year = rewind.year
-   
-    const photoUrl = getRewindPhotoUrl(rewindDBEntry, photo)
    
     return {
       openGraph: {

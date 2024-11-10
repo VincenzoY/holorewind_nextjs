@@ -76,16 +76,9 @@ export async function fetchChannelByChannelIds(channelIds: Array<string>): Promi
 }
 
 export async function createRewind(
-    rewind: object,
-    dataUrl: string
+    rewind: object
 ): Promise<RewindDBEntry> {
-    const formData = new FormData();
-
-    const photoBlob = await fetch(dataUrl).then(res => res.blob())
-    formData.append('photo', photoBlob, 'holorewind.png')
-    formData.append('rewind', JSON.stringify(rewind))
-
-    return await createRecordInCollection<RewindDBEntry>('rewinds', formData)
+    return await createRecordInCollection<RewindDBEntry>('rewinds', {rewind})
 }
 
 export function getRewindPhotoUrl(record: RewindDBEntry, filename: string) {

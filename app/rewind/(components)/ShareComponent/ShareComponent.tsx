@@ -7,7 +7,6 @@ import BlankFile from '@/components/RewindComponents/BlankFile/BlankFile';
 import { toPng } from 'html-to-image'
 import DownloadIcon from '@/components/Icons/DownloadIcon/DownloadIcon';
 import { createRewind } from '@/lib/pocketbase/utils';
-import RewindOpenGraphImage from '../RewindOpenGraphImage/RewindOpenGraphStyleImage';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
@@ -23,9 +22,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
     const watchTimePerChannel = rewindData.specificChannelData.totalWatchTime
 
     const fileRef = useRef(null)
-    const opengraphRef = useRef(null)
     const [fileDataUrl, setFileDataUrl] = useState<string | undefined>(undefined)
-    const [opengraphDataUrl, setOpengraphDataUrl] = useState<string | undefined>(undefined)
 
     const [rewindId, setRewindId] = useState(rewindIdParam)
     const [_, setStorageRewindId] = useLocalStorage<string>("rewindId")
@@ -35,20 +32,14 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
             if(fileRef.current) {
                 setFileDataUrl(await toPng(fileRef.current))
             }
-
-            if(opengraphRef.current) {
-                setOpengraphDataUrl(await toPng(opengraphRef.current))
-            }
         }
         
         createImages()
     }, [])
 
     const createRewindLink = async () => {
-        if (!opengraphDataUrl) return;
-
         if (!rewindId) {
-            const rewind = await createRewind(rewindData, opengraphDataUrl)
+            const rewind = await createRewind(rewindData)
             setRewindId(rewind.id)
             setStorageRewindId(rewind.id)
             return await copyToClipboard(getRewindUrl(rewind.id))
@@ -123,11 +114,6 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className='absolute'>
-                <div ref={opengraphRef}>
-                    <RewindOpenGraphImage rewind={rewindData}/>
                 </div>
             </div>
         </>

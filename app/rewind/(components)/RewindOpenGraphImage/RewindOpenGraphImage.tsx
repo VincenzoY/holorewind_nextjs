@@ -11,7 +11,7 @@ export default function RewindOpenGraphImage({rewind}: RewindOpenGraphImageProps
 
     return (
         <div className="aspect-[1.91/1] bg-[#121212] text-page-white w-[1500px] p-[2.6rem]">
-            <div className="flex w-full h-full gap-8">
+            <div className="flex w-full h-full">
                 <div className='flex flex-col justify-between'>
                     {
                         watchTimePerChannel.slice(0, 3).map((item) => {
@@ -25,7 +25,7 @@ export default function RewindOpenGraphImage({rewind}: RewindOpenGraphImageProps
                         })
                     }
                 </div>
-                <div className='flex flex-col gap-4 w-full h-full'>
+                <div className='flex flex-col gap-4 grow h-full ml-8'>
                     <h2 className="text-9xl font-bold">HoloRewind</h2>
                     <div className='h-3 w-full bg-slate-500 shrink-0'/>
                     <div className="flex justify-between items-center">

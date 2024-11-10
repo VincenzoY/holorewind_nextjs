@@ -35,8 +35,6 @@ export interface ChannelDBEntry extends Channel, PocketBaseDefaultFields{}
 
 export interface Rewind {
     rewind: RewindDataType
-    photo: string
-    year?: string
 }
 
 export interface RewindDBEntry extends Rewind, PocketBaseDefaultFields {}
