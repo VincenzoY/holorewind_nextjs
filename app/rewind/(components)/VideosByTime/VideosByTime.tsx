@@ -20,7 +20,7 @@ type ViewsByMonth = Array<number>
 
 const VideosByTime: React.FC<ViewsPerVideoProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
-    const { video: earliestVideo, earliestView }: EarliestVideo = rewindData.accumulatedVideoData.earliestVideo
+    const { video: earliestVideo, earliestView }: EarliestVideo = rewindData.accumulatedVideoData.earliestVideo || {}
     const viewsByMonth: ViewsByMonth = rewindData.accumulatedVideoData.viewsByMonth
 
     const graphRef = useRef<HTMLCanvasElement>(null)
@@ -69,7 +69,7 @@ const VideosByTime: React.FC<ViewsPerVideoProps> = () => {
             </span>
 
             <div className="inline-grid gap-6 lg:grid-cols-2 grid-cols-1">
-                <VideoDetailFile value={`First video watched this year (${new Date(earliestView).toLocaleDateString('en-GB')})`} videoDetails={earliestVideo}/>
+                {earliestVideo && <VideoDetailFile value={`First video watched this year (${new Date(earliestView).toLocaleDateString('en-GB')})`} videoDetails={earliestVideo}/>}
                 <BlankFile>
                     <h2 className="text-xl font-bold">Views By Month</h2>
                     <canvas ref={graphRef} style={{height: '100%', width: '100%'}}/>
