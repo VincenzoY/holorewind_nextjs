@@ -24,7 +24,7 @@ const WatchTimePerChannel: React.FC<WatchTimePerChannelProps> = () => {
                 <b>Channel Watch Time</b>
             </span>
 
-            <div className="inline-grid gap-6 2xl:grid-cols-4 lg:grid-cols-2 grid-cols-1">
+            <div className="flex flex-wrap gap-6 2xl:w-full lg:w-[750px] w-[360px]">
                 {SpecificFiles}
                 <ChannelDetailListFile title="Channel Watch Time" channelDetailList={watchTimePerChannel} keyToDisplayString={keyToString} />
             </div>

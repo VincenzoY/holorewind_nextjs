@@ -68,7 +68,7 @@ const VideosByTime: React.FC<ViewsPerVideoProps> = () => {
                 <b>Videos By Time</b>
             </span>
 
-            <div className="inline-grid gap-6 lg:grid-cols-2 grid-cols-1">
+            <div className="flex flex-wrap gap-6 2xl:w-full lg:w-[750px] w-[360px]">
                 {earliestVideo && <VideoDetailFile value={`First video watched this year (${new Date(earliestView).toLocaleDateString('en-GB')})`} videoDetails={earliestVideo}/>}
                 <BlankFile>
                     <h2 className="text-xl font-bold">Views By Month</h2>

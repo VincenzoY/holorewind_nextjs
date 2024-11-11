@@ -23,7 +23,7 @@ const ViewsPerVideo: React.FC<ViewsPerVideoProps> = () => {
                 <b>Video Views</b>
             </span>
 
-            <div className="inline-grid gap-6 2xl:grid-cols-4 lg:grid-cols-2 grid-cols-1">
+            <div className="flex flex-wrap gap-6 2xl:w-full lg:w-[750px] w-[360px]">
                 {SpecificFiles}
                 <VideoDetailListFile title="Video Views" videoDetailList={viewsPerVideo} keyToDisplayString={keyToString} />
             </div>
