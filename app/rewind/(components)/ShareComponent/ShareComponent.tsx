@@ -59,6 +59,11 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
         if (newWindow) newWindow.opener = null
     }
 
+    const followOnTwitter = () => {
+        const newWindow = window.open('https://twitter.com/yuyu933933', '_blank', 'noopener,noreferrer')
+        if (newWindow) newWindow.opener = null
+    }
+
     return (
         <>
             <div className='flex flex-col gap-4 items-start justify-center min-h-dvh pt-16 pb-16'>
@@ -120,6 +125,11 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 onClick={shareLinkOnTwitter}
                             >
                                 <TwitterLogo width={24} height={24}/> Share on Twitter
+                            </ShareButton>
+                            <ShareButton 
+                                onClick={followOnTwitter}
+                            >
+                                Follow me on Twitter :D
                             </ShareButton>
                         </div>
                     </div>
