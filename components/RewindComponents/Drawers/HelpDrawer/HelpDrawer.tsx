@@ -24,7 +24,7 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         (I usually find that the older the timeframe gets, the more records it may be missing).
                     </p>
                     <p className="text-md">
-                        Your watch history data is not stored unless you explicitly create a shareable rewind.
+                        Your watch history data only stored on your device unless you explicitly create a shareable rewind.
                         Only the minimum amount of information required to create your rewind is stored.
                     </p>
                     <p className="text-md">
