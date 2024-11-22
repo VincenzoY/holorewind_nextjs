@@ -13,7 +13,7 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
             <div className="p-8 text-page-white overflow-scroll flex flex-col h-full no-scrollbar">
                 <div className="flex flex-col gap-4">
                     <p className="text-md">
-                        If you have any issues, send me a message {" "}
+                        If you have any issues/comments, send me a message {" "}
                         <Link href="https://x.com/yuyu933933" target="blank">
                             @yuyu933933
                         </Link> and I&apos;ll try to help you out.
@@ -24,7 +24,7 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         (I usually find that the older the timeframe gets, the more records it may be missing).
                     </p>
                     <p className="text-md">
-                        Your watch history data only stored on your device unless you explicitly create a shareable rewind.
+                        Your watch history data is only stored on your device unless you explicitly create a shareable rewind.
                         Only the minimum amount of information required to create your rewind is stored.
                     </p>
                     <p className="text-md">
