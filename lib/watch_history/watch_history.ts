@@ -5,7 +5,7 @@ type DateFilter = {startTime: string | undefined, endTime: string | undefined}
 export interface WatchHistoryEntry {
     "header": "YouTube" | "YouTube Music",
     "title": string,
-    "titleUrl": string,
+    "titleUrl"?: string,
     "subtitles"?: Array<{
         "name": string,
         "url": string
@@ -43,26 +43,25 @@ export function formatWatchHistory(watchHistory: string, year: number) {
     const endTimeDate = endTime && Date.parse(endTime)
 
     watchHistoryJSON.forEach((watch_record, index) => {
-        const videoMatch = watch_record["titleUrl"].match(videoRegex);
+        const videoMatch = watch_record["titleUrl"]?.match(videoRegex);
         const time = watch_record["time"];
-    
+        
         if (!videoMatch || !time) { return; }
-    
+        
         if((startTimeDate && Date.parse(time) < startTimeDate) || (endTimeDate && Date.parse(time) > endTimeDate)) { return; }
 
         const videoId = videoMatch[3] as string
         const channelLink = watch_record["subtitles"]?.[0]?.["name"]
         const channelMatch = channelLink && (channelLink.match(channelRegex) || undefined)
         const channelId = channelMatch && channelMatch[1]
-    
-        if(filteredData[videoId] === undefined) { 
-            filteredData[videoId] = {
-                watchHistory: [],
-                channelId: channelId
-            } 
+
+        filteredData[videoId] = filteredData[videoId] || {
+            watchHistory: [],
+            channelId: channelId
         }
 
         const approxEndWatchTime = index === 0 ? new Date(Date.now()).toISOString() : watchHistoryJSON[index - 1]["time"]
+
         filteredData[videoId]["watchHistory"].push([time, approxEndWatchTime])
         filteredData[videoId]["channelId"] ||= channelId
     })
