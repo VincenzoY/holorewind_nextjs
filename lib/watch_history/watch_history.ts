@@ -50,12 +50,12 @@ export function formatWatchHistory(watchHistory: string, year: number) {
         
         if((startTimeDate && Date.parse(time) < startTimeDate) || (endTimeDate && Date.parse(time) > endTimeDate)) { return; }
 
-        const videoId = videoMatch[3] as string
+        const videoId = videoMatch[3]
         const channelLink = watch_record["subtitles"]?.[0]?.["name"]
-        const channelMatch = channelLink && (channelLink.match(channelRegex) || undefined)
+        const channelMatch = channelLink?.match(channelRegex) || undefined
         const channelId = channelMatch && channelMatch[1]
 
-        filteredData[videoId] = filteredData[videoId] || {
+        filteredData[videoId] ||= {
             watchHistory: [],
             channelId: channelId
         }
