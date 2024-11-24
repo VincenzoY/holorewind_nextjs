@@ -60,7 +60,7 @@ export function formatWatchHistory(watchHistory: string, year: number) {
             channelId: channelId
         }
 
-        const approxEndWatchTime = index === 0 ? new Date(Date.now()).toISOString() : watchHistoryJSON[index - 1]["time"]
+        const approxEndWatchTime = watchHistoryJSON[index - 1]?.["time"] || new Date(Date.now()).toISOString()
 
         filteredData[videoId]["watchHistory"].push([time, approxEndWatchTime])
         filteredData[videoId]["channelId"] ||= channelId
