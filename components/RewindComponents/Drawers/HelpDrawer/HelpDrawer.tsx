@@ -27,7 +27,7 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         YouTube does not provide watch time and only provides the time you click on a video so watch time is 
                         an approximated attribute. To approximate for watch time, I assume you either watch the whole video or 
                         the duration until you click on a different youtube video.
-                        (There's some extra stuff I calculate but that's the general idea so it should hopefully be a good enough approximation).
+                        (There&apos;s some extra stuff I calculate but that&apos;s the general idea so it should hopefully be a good enough approximation).
                     </p>
                     <p className="text-md">
                         Your watch history data is only stored on your device unless you explicitly create a shareable rewind.
