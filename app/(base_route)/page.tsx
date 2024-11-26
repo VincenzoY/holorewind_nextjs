@@ -12,6 +12,7 @@ import NiceModal from "@ebay/nice-modal-react";
 import GuideDrawer from "@/components/RewindComponents/Drawers/GuideDrawer/GuideDrawer";
 import Link from "next/link";
 import MainLogo from "@/components/Icons/MainLogo/MainLogo";
+import { createRewindCreationStat } from "@/lib/pocketbase/utils";
 
 export default function Page() {
   const [, setRewindId] = useLocalStorage<string>("rewindId")
@@ -98,6 +99,8 @@ async function getRewindData(files: FileList): Promise<RewindDataType> {
     const formattedWatchHistory = formatWatchHistory(watchHistory, 2024)
     const watchHistoryWithData = await fetchRecords(formattedWatchHistory)
     const rewindData = await generateRewind(watchHistoryWithData, 2024)
+
+    await createRewindCreationStat()
         
     return rewindData
 }

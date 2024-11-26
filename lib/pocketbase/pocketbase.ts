@@ -39,6 +39,12 @@ export interface Rewind {
 
 export interface RewindDBEntry extends Rewind, PocketBaseDefaultFields {}
 
+export interface Stats {
+    stat_type: string
+}
+
+export interface StatsDBEntry extends Stats, PocketBaseDefaultFields {}
+
 export interface TypedPocketBase extends PocketBase {
     collection(idOrName: string): RecordService // default fallback for any other collection
     collection(idOrName: 'channels'): RecordService<ChannelDBEntry>

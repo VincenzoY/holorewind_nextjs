@@ -1,4 +1,4 @@
-import pb, { Channel, PAGE_SIZE, RewindDBEntry, Video, createRecordInCollection } from "./pocketbase"
+import pb, { Channel, PAGE_SIZE, RewindDBEntry, StatsDBEntry, Video, createRecordInCollection } from "./pocketbase"
 
 
 export async function fetchVideoByVideoIds(videoIds: Array<string>): Promise<Record<string, Video>> {
@@ -83,4 +83,8 @@ export async function createRewind(
 
 export function getRewindPhotoUrl(record: RewindDBEntry, filename: string) {
     return pb.files.getUrl(record, filename)
+}
+
+export async function createRewindCreationStat(): Promise<StatsDBEntry> {
+    return await createRecordInCollection<StatsDBEntry>('stats', {stat_type: 'created_rewind'})
 }
