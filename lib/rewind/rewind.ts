@@ -82,6 +82,16 @@ export async function generateRewind({videoData, channelData}: GenerateRewindPar
             "type": "largest",
             "lambda": ({channel, watchHistory}) => ({key: watchHistory.totalWatchTime, channel: channel})
         },
+        "views": {
+            "n": 15,
+            "type": "largest",
+            "lambda": ({channel, watchHistory}) => ({key: watchHistory.views, channel: channel})
+        },
+        "uniqueViews": {
+            "n": 15,
+            "type": "largest",
+            "lambda": ({channel, watchHistory}) => ({key: watchHistory.uniqueViews, channel: channel})
+        },
     }
 
     const channelAccumulationFilters: Record<string, AccumulatorInfo<DecoratedChannelData, number>> = {

@@ -8,6 +8,8 @@ import VideosByTime from "../VideosByTime/VideosByTime"
 import ShareComponent from "../ShareComponent/ShareComponent"
 import { RewindDataType } from "@/lib/rewind/rewind"
 import { RewindContext } from "../../(context)/RewindContext"
+import ViewsPerChannel from "../ViewsPerChannel/ViewsPerChannel"
+import UniqueViewsPerChannel from "../UniqueViewsPerChannel/UniqueViewsPerChannel"
 
 interface RewindComponent {
     rewind: RewindDataType
@@ -24,6 +26,8 @@ export default function RewindComponent({ rewind, rewindId }: RewindComponent) {
                 <WatchTimePerVideo />
                 <WatchTimePerChannel />
                 <ViewsPerVideo />
+                <ViewsPerChannel />
+                <UniqueViewsPerChannel />
                 <VideosByTime />
                 <ShareComponent rewindId={rewindId} />
             </div>
