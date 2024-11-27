@@ -23,7 +23,7 @@ export default function VideoDetailFile({
     const placementBorderColour = getPlacementBorderColour(index)
 
     return (
-        <div className="aspect-[8.5/11] bg-page-white h-[29rem] p-[2.6rem] flex flex-col gap-2">
+        <div className="aspect-[8.5/11] bg-page-white w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-2">
             <div>
                 <div className={`border-2 ${placementBorderColour} border-solid p-1 rounded-sm inline-block float-right ml-2`}>
                     <a href={`https://www.youtube.com/channel/${videoDetails.channel.channel_id}`} target="_blank">
