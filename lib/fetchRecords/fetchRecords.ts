@@ -67,9 +67,12 @@ export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory)
                 Math.floor(Math.abs((startDate.valueOf() - releaseDate.valueOf()) / 1000)): 
                 0
             )
-            totalWatchTime += Math.min(
-                Math.floor(Math.abs((endDate.valueOf() - startDate.valueOf()) / 1000)),
-                duration - timeAlreadyPassed,
+            totalWatchTime += Math.max(
+                Math.min(
+                    Math.floor(Math.abs((endDate.valueOf() - startDate.valueOf()) / 1000)),
+                    duration - timeAlreadyPassed,
+                ),
+                0
             )
         }
 
