@@ -20,7 +20,10 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
     const rewindData = useContext(RewindContext) as RewindDataType
     const { uniqueViews } = rewindData.accumulatedVideoData
     const { channelCount } = rewindData.accumulatedChannelData
+    // initial launch didn't include viewsPerChannel so must keep watchTimePerChannel for back compat
+    const watchTimePerChannel = rewindData.specificChannelData.totalWatchTime
     const viewsPerChannel = rewindData.specificChannelData.views
+    const dataPerChannel = viewsPerChannel ?? watchTimePerChannel
 
     const fileRef = useRef(null)
     const [fileDataUrl, setFileDataUrl] = useState<string | undefined>(undefined)
@@ -84,7 +87,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 <div>
                                     <h3 className="text-md font-bold">Top Channels</h3>
                                     <div className='grid grid-rows-5 grid-cols-2 gap-x-4 mr-2 ml-2'>
-                                        {viewsPerChannel.slice(0, 10).map((item) => {
+                                        {dataPerChannel.slice(0, 10).map((item) => {
                                             return (
                                                 <div className='truncate text-sm' key={item.channel.channel_id}>{item.channel.name}</div>
                                             )
@@ -93,7 +96,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 </div>
                                 <div className='flex justify-around'>
                                     {
-                                        viewsPerChannel.slice(0, 3).map((item, index) => {
+                                        dataPerChannel.slice(0, 3).map((item, index) => {
                                             return (
                                                 <img 
                                                     src={item.channel.photo}
