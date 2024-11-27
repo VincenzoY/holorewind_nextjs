@@ -67,7 +67,7 @@ export async function generateRewind({videoData, channelData}: GenerateRewindPar
             "initialValue": Array(12).fill(0),
             "reducer": (item, acc) => {
                 for(const [start, _] of item.watchHistory.watchHistory) {
-                    const monthIndex = (new Date(start)).getUTCMonth()
+                    const monthIndex = (new Date(start)).getMonth()
                     acc[monthIndex] += 1
                 }
 
