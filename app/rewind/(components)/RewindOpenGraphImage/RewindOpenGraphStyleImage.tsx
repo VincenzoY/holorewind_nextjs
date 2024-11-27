@@ -9,14 +9,14 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
     const { year } = rewind
     const { uniqueViews, totalViews } = rewind.accumulatedVideoData
     const { channelCount } = rewind.accumulatedChannelData
-    const watchTimePerChannel = rewind.specificChannelData.totalWatchTime.slice(0, 10)
+    const viewsPerChannel = rewind.specificChannelData.views.slice(0, 10)
 
     return (
         <div tw="flex h-[785px] bg-[#121212] text-[#f4f6f8] w-[1500px] p-[2.6rem]">
             <div tw="flex w-full h-full">
                 <div tw='flex flex-col justify-between'>
                     {
-                        watchTimePerChannel.slice(0, 3).map((item) => {
+                        viewsPerChannel.slice(0, 3).map((item) => {
                             return (
                                 <img 
                                     src={item.channel.photo}
@@ -52,8 +52,8 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                     <div tw="grow flex flex-col">
                         <h3 tw="text-4xl font-bold">Top Channels</h3>
                         <div tw='flex'>
-                            <ChannelsColumn channels={watchTimePerChannel.filter((_, i) => i % 2 === 0)}/>
-                            <ChannelsColumn channels={watchTimePerChannel.filter((_, i) => i % 2 === 1)}/>
+                            <ChannelsColumn channels={viewsPerChannel.filter((_, i) => i % 2 === 0)}/>
+                            <ChannelsColumn channels={viewsPerChannel.filter((_, i) => i % 2 === 1)}/>
                         </div>
                     </div>
                     <p tw='text-3xl'>Find yours @ holorewind.com</p>

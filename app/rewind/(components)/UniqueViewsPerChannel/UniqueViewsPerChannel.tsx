@@ -10,7 +10,6 @@ const UniqueViewsPerChannel: React.FC<UniqueViewsPerChannelProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
 
     const uniqueViewsPerChannel = rewindData.specificChannelData.uniqueViews
-    console.log(uniqueViewsPerChannel)
 
     if (!uniqueViewsPerChannel) return
 
