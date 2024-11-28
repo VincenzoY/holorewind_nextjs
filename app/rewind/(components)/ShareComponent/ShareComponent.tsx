@@ -22,8 +22,8 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
     const { channelCount } = rewindData.accumulatedChannelData
     // initial launch didn't include viewsPerChannel so must keep watchTimePerChannel for back compat
     const watchTimePerChannel = rewindData.specificChannelData.totalWatchTime
-    const viewsPerChannel = rewindData.specificChannelData.views
-    const dataPerChannel = viewsPerChannel ?? watchTimePerChannel
+    const uniqueViewsPerChannel = rewindData.specificChannelData.uniqueViews
+    const dataPerChannel = uniqueViewsPerChannel ?? watchTimePerChannel
 
     const fileRef = useRef(null)
     const [fileDataUrl, setFileDataUrl] = useState<string | undefined>(undefined)

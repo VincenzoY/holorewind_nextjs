@@ -10,8 +10,8 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
     const { uniqueViews, totalViews } = rewind.accumulatedVideoData
     const { channelCount } = rewind.accumulatedChannelData
     const watchTimePerChannel = rewind.specificChannelData.totalWatchTime
-    const viewsPerChannel = rewind.specificChannelData.views
-    const dataPerChannel = (viewsPerChannel ?? watchTimePerChannel).slice(0, 10)
+    const uniqueViewsPerChannel = rewind.specificChannelData.uniqueViews
+    const dataPerChannel = (uniqueViewsPerChannel ?? watchTimePerChannel).slice(0, 10)
 
     return (
         <div tw="flex h-[785px] bg-[#121212] text-[#f4f6f8] w-[1500px] p-[2.6rem]">
