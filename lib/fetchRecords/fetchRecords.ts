@@ -36,17 +36,7 @@ export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory)
     const decoratedVideoWithChannelData: Record<string, DecoratedVideoWithChannelData> = {}
     const decoratedChannelData: Record<string, DecoratedChannelData> = {}
 
-    const allChannelIdsSet = new Set((await fetchAllRecordsInCollection<{ channel_id: string }>("channels", {fields: 'channel_id'})).map((object) => object.channel_id))
-
-    const filteredVideoIds = videoIds.filter((videoId) => {
-        const videoChannelId = formattedWatchHistory[videoId]["channelId"]
-
-        if (videoChannelId && !allChannelIdsSet.has(videoChannelId)) return false
-
-        return true
-    })
-
-    const videos = await fetchVideosByVideoIdsInParallel(filteredVideoIds)
+    const videos = await fetchVideosByVideoIdsInParallel(videoIds)
 
     for(const videoId in videos) {
         const video = videos[videoId]
