@@ -26,8 +26,8 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         The watch history data is provided by YouTube/Google and can be missing some information/views,
                         making some attributes slightly inaccurate. 
                         (I usually find that the older the timeframe gets, the more records it may be missing).
-                        I also believe that if you pause/clear your watch history through YouTube, those won't show
-                        but i haven't tested it.
+                        I also believe that if you pause/clear your watch history through YouTube, those won&apos;t show
+                        but i haven&apos;t tested it.
                     </p>
                     <p className="text-md">
                         YouTube does not provide watch time and only provides the time you click on a video so watch time is 
