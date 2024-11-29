@@ -13,7 +13,7 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
         <div className="p-8 text-page-white overflow-scroll flex flex-col h-full no-scrollbar">
             <div className="flex flex-col gap-4 text-md">
                 <p>
-                  Holorewind was created by {" "}
+                  HoloRewind was created by {" "}
                   <Link href="https://x.com/yuyu933933" target="blank">@yuyu933933</Link>.
                   This site is in no way affiliated with either YouTube or Cover Corp.
                 </p>
