@@ -80,7 +80,7 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
                   your YouTube account (other than your watch history) is contained in the watch history file.
                 </p>
                 <p>
-                  If you have any questions or concerns about the privacy of handling of data on this site, 
+                  If you have any questions or concerns about the handling of privacy data on this site, 
                   contact me by sending a message to @yuyu933933 on Twitter.
                 </p>
             </div>
