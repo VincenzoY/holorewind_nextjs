@@ -19,8 +19,9 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         </Link> and I&apos;ll try to help you out.
                     </p>
                     <p className="text-md">
-                        Your watch history data is only stored on your device unless you explicitly create a shareable rewind.
-                        Only the minimum amount of information required to create your rewind is stored.
+                        If you find you have no watch data, it is possible you are logged in as the wrong account on 
+                        Google Takeout. It might also be possible that your history is stored under a brand account; in 
+                        which case you should login under that account in Google Takeout.
                     </p>
                     <p className="text-md">
                         The watch history data is provided by YouTube/Google and can be missing some information/views,

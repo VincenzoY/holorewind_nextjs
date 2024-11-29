@@ -13,6 +13,8 @@ import GuideDrawer from "@/components/RewindComponents/Drawers/GuideDrawer/Guide
 import Link from "next/link";
 import MainLogo from "@/components/Icons/MainLogo/MainLogo";
 import { createRewindCreationStat } from "@/lib/pocketbase/utils";
+import {default as TextLink} from "@/components/GenericComponents/Link/Link"
+import PrivacyPolicyDrawer from "@/components/RewindComponents/Drawers/PrivacyPolicyDrawer/PrivacyPolicyDrawer";
 
 export default function Page() {
   const [, setRewindId] = useLocalStorage<string>("rewindId")
@@ -28,7 +30,7 @@ export default function Page() {
   }
 
   return (
-    <div className="w-full flex items-center justify-center h-dvh">
+    <div className="w-full flex items-center justify-center h-dvh relative">
       <div className="flex flex-col items-center gap-8 w-full">
           {/*<div className="bg-slate-300 w-[80%] max-w-[60rem] h-48"/>*/}
           {<MainLogo />}
@@ -52,6 +54,9 @@ export default function Page() {
                 </Link>
               </div>
           </div>
+      </div>
+      <div className="absolute bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
+        By using this site you agree to our <TextLink href="#" onClick={() => NiceModal.show(PrivacyPolicyDrawer)}>Privacy Policy</TextLink>
       </div>
     </div>
   )

@@ -113,12 +113,14 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     </div>
                     <div>
                         <div className='flex flex-col gap-4'>
+                            {/* 
                             <ShareButton 
                                 disabled={!fileDataUrl}
                                 onClick={() => fileDataUrl && downloadImage(fileDataUrl)}
                             >
                                 <DownloadIcon width={24} height={24}/> Download
                             </ShareButton>
+                            */}
                             <ShareButton 
                                 onClick={async () => await copyToClipboard(await createRewindUrl())}
                             >
