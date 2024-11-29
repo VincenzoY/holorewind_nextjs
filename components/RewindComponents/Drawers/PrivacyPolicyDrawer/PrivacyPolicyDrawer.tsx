@@ -60,7 +60,8 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
                     Process the file to show you your HoloRewind
                   </li>
                   <li>
-                    If you use any of the sharing features, the below information is uploaded to our database to generate a shareable copy,
+                    If you use any of the sharing features, the below information is uploaded to our database to generate a shareable copy.
+                    Otherwise, the below information is only stored on your device.
                     <ul className="list-disc pl-4 flex flex-col gap-2">
                       <li>
                         General rewind information of total views, total unique views, total channel views and total approximate watch time.
