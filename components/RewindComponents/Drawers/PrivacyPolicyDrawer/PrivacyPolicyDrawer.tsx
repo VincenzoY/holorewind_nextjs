@@ -47,6 +47,10 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
                     may set cookies on your device and collect data such as your IP address, your browser type, and the page you visited on our site. 
                     (<Link href="https://policies.google.com/privacy">Google Privacy Policy</Link>)
                   </li>
+                  <li>
+                    When you create a rewind, a record is created that a rewind was made for record keeping. The only information stored is that 
+                    a rewind was generated and the time it was created.
+                  </li>
                 </ul>
                 <p>
                   To create your HoloRewind, a copy of your YouTube watch history is requested. Below is what we do with the data you upload
