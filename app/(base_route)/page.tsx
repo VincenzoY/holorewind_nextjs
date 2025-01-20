@@ -47,7 +47,7 @@ export default function Page() {
                   </Button>
               </div>
               <div>
-                <Link href="https://holorewind.com/rewind/q1meo0jn5x80u4n">
+                <Link href="https://holorewind.com/rewind/ib18pc2g61zvxqu">
                   <Button className="w-[200px] md:w-auto">
                     See an example
                   </Button>
