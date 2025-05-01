@@ -11,6 +11,7 @@
   "dependencies": {
     "@ebay/nice-modal-react": "^1.2.13",
     "@tanstack/react-query": "^4.36.1",
+    "@tanstack/react-query-devtools": "^4.36.1",
     "chart.js": "^4.4.5",
     "heap-typed": "^1.52.3",
     "html-to-image": "^1.11.11",
