@@ -2,12 +2,12 @@ import VideoDetailFile from "@/components/RewindComponents/VideoDetails/VideoDet
 import VideoDetailListFile from "@/components/RewindComponents/VideoDetails/VideoDetailListFile/VideoDetailListFile"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
+import { RewindDataType } from "@/lib/rewind/rewind"
 
 interface ViewsPerVideoProps {}
 
 const ViewsPerVideo: React.FC<ViewsPerVideoProps> = () => {
-    const rewindData = useContext(RewindContext)
-    if (!rewindData) return;
+    const rewindData = useContext(RewindContext) as RewindDataType
 
     const viewsPerVideo: Array<{ key: number, video_id: string }> = rewindData.video_views
 

@@ -3,12 +3,12 @@ import VideoDetailListFile from "@/components/RewindComponents/VideoDetails/Vide
 import { humanizeSeconds } from "@/lib/utils/utils"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
+import { RewindDataType } from "@/lib/rewind/rewind"
 
 interface WatchTimePerVideoProps {}
 
 const WatchTimePerVideo: React.FC<WatchTimePerVideoProps> = () => {
-    const rewindData = useContext(RewindContext)
-    if (!rewindData) return;
+    const rewindData = useContext(RewindContext) as RewindDataType
 
     const videoWatchTime: Array<{ key: number, video_id: string }> = rewindData.video_watch_time
 
