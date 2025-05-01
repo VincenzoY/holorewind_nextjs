@@ -1,4 +1,4 @@
-import { getPeriodFromYear } from "../utils/utils"
+import { getPeriodFromYear } from "../../utils/utils"
 
 type DateFilter = {startTime: string | undefined, endTime: string | undefined}
 

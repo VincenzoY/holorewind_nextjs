@@ -7,7 +7,7 @@ import { RewindContext } from "../../(context)/RewindContext"
 import { Channel, VideoWithChannel } from "@/lib/pocketbase/pocketbase"
 import BlankFile from "@/components/RewindComponents/BlankFile/BlankFile"
 import Chart from 'chart.js/auto'
-import { MONTHS } from "@/lib/utils/date_constants"
+import { MONTHS } from "@/lib/utils/dateConstants"
 
 interface ViewsPerVideoProps {}
 

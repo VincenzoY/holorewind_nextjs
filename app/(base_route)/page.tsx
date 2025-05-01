@@ -5,9 +5,9 @@ import Button from "@/components/GenericComponents/Button/Button";
 import { useLocalStorage } from "@/lib/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify"
-import { fetchRecords } from "@/lib/fetchRecords/fetchRecords";
+import { fetchRecords } from "@/lib/watchHistory/fetchRecords/fetchRecords";
 import { RewindDataType, generateRewind } from "@/lib/rewind/rewind";
-import { formatWatchHistory } from "@/lib/watch_history/watch_history";
+import { formatWatchHistory } from "@/lib/watchHistory/formatWatchHistory/formatWatchHistory";
 import NiceModal from "@ebay/nice-modal-react";
 import GuideDrawer from "@/components/RewindComponents/Drawers/GuideDrawer/GuideDrawer";
 import Link from "next/link";

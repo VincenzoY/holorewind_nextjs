@@ -1,4 +1,4 @@
-import { DecoratedChannelData, DecoratedVideoWithChannelData } from "../fetchRecords/fetchRecords"
+import { DecoratedChannelData, DecoratedVideoWithChannelData } from "../watchHistory/fetchRecords/fetchRecords"
 import { Channel, VideoWithChannel } from "../pocketbase/pocketbase"
 import { type HeapInfo, type AccumulatorInfo, nLargestObjects, reduce } from "./utils"
 
