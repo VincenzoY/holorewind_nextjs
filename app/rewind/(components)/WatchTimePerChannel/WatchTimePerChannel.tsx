@@ -10,11 +10,11 @@ interface WatchTimePerChannelProps {}
 const WatchTimePerChannel: React.FC<WatchTimePerChannelProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
 
-    const watchTimePerChannel = rewindData.specificChannelData.totalWatchTime
+    const watchTimePerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_watch_time
 
     const SpecificFiles = watchTimePerChannel.slice(0, 3).map((item, index) => {
         return (
-            <ChannelDetailFile key={index} index={index} value={`Watch Time: ${keyToString(item.key)}`} channelDetails={item.channel}/>
+            <ChannelDetailFile key={index} index={index} value={`Watch Time: ${keyToString(item.key)}`} channelId={item.channel_id}/>
         )
     })
 

@@ -1,16 +1,15 @@
 "use client"
 
 import { RewindContext } from '../../(context)/RewindContext';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 import { RewindDataType } from '@/lib/rewind/rewind';
 import BlankFile from '@/components/RewindComponents/BlankFile/BlankFile';
-import { toPng } from 'html-to-image'
-import DownloadIcon from '@/components/Icons/DownloadIcon/DownloadIcon';
-import { createRewind } from '@/lib/pocketbase/utils';
+import { createRewind, fetchChannelByChannelIds } from '@/lib/pocketbase/utils';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
 import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import TwitterLogo from '@/components/Icons/TwitterIcon/TwitterIcon';
+import { useQuery } from '@tanstack/react-query';
 
 interface ShareComponentProps {
     rewindId?: string
@@ -18,28 +17,15 @@ interface ShareComponentProps {
 
 export default function ShareComponent({ rewindId: rewindIdParam }: ShareComponentProps) {
     const rewindData = useContext(RewindContext) as RewindDataType
-    const { uniqueViews } = rewindData.accumulatedVideoData
-    const { channelCount } = rewindData.accumulatedChannelData
+    const { total_unique_videos_viewed: uniqueViews } = rewindData
+    const { total_channel_count: channelCount } = rewindData
     // initial launch didn't include viewsPerChannel so must keep watchTimePerChannel for back compat
-    const watchTimePerChannel = rewindData.specificChannelData.totalWatchTime
-    const uniqueViewsPerChannel = rewindData.specificChannelData.uniqueViews
+    const watchTimePerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_watch_time
+    const uniqueViewsPerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_unique_views
     const dataPerChannel = uniqueViewsPerChannel ?? watchTimePerChannel
-
-    const fileRef = useRef(null)
-    const [fileDataUrl, setFileDataUrl] = useState<string | undefined>(undefined)
 
     const [rewindId, setRewindId] = useState(rewindIdParam)
     const [_, setStorageRewindId] = useLocalStorage<string>("rewindId")
-
-    useEffect(() => {
-        const createImages = async () => {
-            if(fileRef.current) {
-                setFileDataUrl(await toPng(fileRef.current))
-            }
-        }
-        
-        createImages()
-    }, [])
 
     const createRewindUrl = async () => {
         if (rewindId) { return getRewindUrl(rewindId) }
@@ -74,7 +60,6 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                     <b>Share your HoloRewind</b>
                 </span>
                 <div className="inline-grid gap-6 lg:grid-cols-2 grid-cols-1">
-                    <div ref={fileRef}>
                         <BlankFile>
                             <div className='flex flex-col gap-2'>
                                 <h2 className="text-2xl font-bold">HoloRewind</h2>
@@ -88,20 +73,38 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                     <h3 className="text-md font-bold">Top Channels</h3>
                                     <div className='grid grid-rows-5 grid-cols-2 gap-x-4 mr-2 ml-2'>
                                         {dataPerChannel.slice(0, 10).map((item) => {
+                                            const channelId = item.channel_id
+                        
+                                            const { data: channel } = useQuery({ 
+                                                queryKey: ['fetchChannel', channelId], 
+                                                queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
+                                            })
+                        
+                                            if (!channel) return
+                                            
                                             return (
-                                                <div className='truncate text-sm' key={item.channel.channel_id}>{item.channel.name}</div>
+                                                <div className='truncate text-sm' key={channel.channel_id}>{channel.name}</div>
                                             )
                                         })}
                                     </div>
                                 </div>
                                 <div className='flex justify-around'>
                                     {
-                                        dataPerChannel.slice(0, 3).map((item, index) => {
+                                        dataPerChannel.slice(0, 3).map((item) => {
+                                            const channelId = item.channel_id
+                        
+                                            const { data: channel } = useQuery({ 
+                                                queryKey: ['fetchChannel', channelId], 
+                                                queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
+                                            })
+                        
+                                            if (!channel) return
+
                                             return (
                                                 <img 
-                                                    src={item.channel.photo}
-                                                    className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${item.channel.name}`}
-                                                    key={item.channel.channel_id}
+                                                    src={channel.photo}
+                                                    className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${channel.name}`}
+                                                    key={channel.channel_id}
                                                 />
                                             )
                                         })
@@ -110,17 +113,8 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 <p className='text-xs'>Find yours @ holorewind.com</p>
                             </div>
                         </BlankFile>
-                    </div>
                     <div>
                         <div className='flex flex-col gap-4'>
-                            {/* 
-                            <ShareButton 
-                                disabled={!fileDataUrl}
-                                onClick={() => fileDataUrl && downloadImage(fileDataUrl)}
-                            >
-                                <DownloadIcon width={24} height={24}/> Download
-                            </ShareButton>
-                            */}
                             <ShareButton 
                                 onClick={async () => await copyToClipboard(await createRewindUrl())}
                             >

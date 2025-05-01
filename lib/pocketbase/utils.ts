@@ -11,7 +11,8 @@ export async function fetchVideoByVideoIds(videoIds: Array<string>): Promise<Rec
         pageNum += 1, page = videoIds.slice(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE)
     ) {
         const videoDBRecords = (await pb.collection("videos").getList(1, PAGE_SIZE, {
-            filter: page.map((id) => `video_id="${id}"`).join("||")
+            filter: page.map((id) => `video_id="${id}"`).join("||"),
+            requestKey: null
         }))["items"]
 
         videoDBRecords.forEach((videoDBRecord) => {
@@ -63,7 +64,8 @@ export async function fetchChannelByChannelIds(channelIds: Array<string>): Promi
         pageNum += 1, page = channelIds.slice(pageNum * PAGE_SIZE, (pageNum + 1) * PAGE_SIZE)
     ) {
         const channelDBRecords = (await pb.collection("channels").getList(1, PAGE_SIZE, {
-            filter: page.map((id) => `channel_id="${id}"`).join("||")
+            filter: page.map((id) => `channel_id="${id}"`).join("||"),
+            requestKey: null
         }))["items"]
 
         channelDBRecords.forEach((channelDBRecord) => {

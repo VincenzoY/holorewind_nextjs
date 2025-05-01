@@ -12,16 +12,16 @@ import { MONTHS } from "@/lib/utils/dateConstants"
 interface ViewsPerVideoProps {}
 
 interface EarliestVideo {
-    video: VideoWithChannel, 
-    earliestView: string
+    video_id: string, 
+    earliest_view: string
 }
 
 type ViewsByMonth = Array<number>
 
 const VideosByTime: React.FC<ViewsPerVideoProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
-    const { video: earliestVideo, earliestView }: EarliestVideo = rewindData.accumulatedVideoData.earliestVideo || {}
-    const viewsByMonth: ViewsByMonth = rewindData.accumulatedVideoData.viewsByMonth
+    const earliestVideo: EarliestVideo = rewindData.earliest_video || {}
+    const viewsByMonth: ViewsByMonth = rewindData.views_by_month
 
     const graphRef = useRef<HTMLCanvasElement>(null)
 
@@ -69,7 +69,7 @@ const VideosByTime: React.FC<ViewsPerVideoProps> = () => {
             </span>
 
             <div className="flex flex-wrap gap-6 2xl:w-full lg:w-[750px] w-[360px]">
-                {earliestVideo && <VideoDetailFile value={`First video watched this year (${new Date(earliestView).toLocaleDateString('en-GB')})`} videoDetails={earliestVideo}/>}
+                {earliestVideo && <VideoDetailFile value={`First video watched this year (${new Date(earliestVideo.earliest_view).toLocaleDateString('en-GB')})`} videoId={earliestVideo.video_id}/>}
                 <BlankFile>
                     <h2 className="text-xl font-bold">Views By Month</h2>
                     <canvas ref={graphRef} style={{height: '100%', width: '100%'}}/>

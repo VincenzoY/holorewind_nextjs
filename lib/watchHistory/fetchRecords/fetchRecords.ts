@@ -13,11 +13,6 @@ export interface DecoratedVideoData {
     watchHistory: VideoWatchHistory
 }
 
-export interface DecoratedVideoWithChannelData {
-    video: VideoWithChannel
-    watchHistory: VideoWatchHistory
-}
-
 interface ChannelWatchHistory {
     uniqueViews: number, 
     views: number, 
@@ -31,9 +26,8 @@ export interface DecoratedChannelData {
 
 export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory) {
     const videoIds = Object.keys(formattedWatchHistory)
-    const tempVideoData: Record<string, DecoratedVideoData> = {}
     const tempChannelWatchData: Record<string, ChannelWatchHistory> = {}
-    const decoratedVideoWithChannelData: Record<string, DecoratedVideoWithChannelData> = {}
+    const decoratedVideoData: Record<string, DecoratedVideoData> = {}
     const decoratedChannelData: Record<string, DecoratedChannelData> = {}
 
     const videos = await fetchVideosByVideoIdsInParallel(videoIds)
@@ -66,7 +60,7 @@ export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory)
             )
         }
 
-        tempVideoData[videoId] = {
+        decoratedVideoData[videoId] = {
             video: video,
             watchHistory: {
                 watchHistory: videoWatchHistory,
@@ -96,17 +90,5 @@ export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory)
         }
     }
 
-    for (const videoId in tempVideoData) {
-        const { video, watchHistory } = tempVideoData[videoId]
-
-        decoratedVideoWithChannelData[videoId] = {
-            video: {
-                ...video,
-                channel: channels[video.channel_id]
-            },
-            watchHistory: watchHistory
-        }
-    }
-
-    return {videoData: decoratedVideoWithChannelData, channelData: decoratedChannelData}
+    return {videoData: decoratedVideoData, channelData: decoratedChannelData}
 }

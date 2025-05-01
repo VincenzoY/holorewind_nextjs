@@ -1,17 +1,22 @@
 import { Channel } from "@/lib/pocketbase/pocketbase"
-import { RewindDataItem, RewindDataType } from "@/lib/rewind/rewind"
+import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils"
+import { RewindDataType } from "@/lib/rewind/rewind"
 
 interface RewindOpenGraphStyleImageProps {
     rewind: RewindDataType
+    channels: Record<string, Channel>
 }
 
-export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyleImageProps) {
-    const { year } = rewind
-    const { uniqueViews, totalViews } = rewind.accumulatedVideoData
-    const { channelCount } = rewind.accumulatedChannelData
-    const watchTimePerChannel = rewind.specificChannelData.totalWatchTime
-    const uniqueViewsPerChannel = rewind.specificChannelData.uniqueViews
-    const dataPerChannel = (uniqueViewsPerChannel ?? watchTimePerChannel).slice(0, 10)
+export default function RewindOpenGraphStyleImage({rewind, channels}: RewindOpenGraphStyleImageProps) {
+    const { 
+        year, 
+        total_view_count: totalViews, 
+        total_unique_videos_viewed: uniqueViews,
+        total_channel_count: channelCount,
+        channel_watch_time: watchTimePerChannel,
+        channel_unique_views: uniqueViewsPerChannel,
+    } = rewind
+    const dataPerChannel: Array<{key: number, channel_id: string}> = (uniqueViewsPerChannel ?? watchTimePerChannel).slice(0, 10)
 
     return (
         <div tw="flex h-[785px] bg-[#121212] text-[#f4f6f8] w-[1500px] p-[2.6rem]">
@@ -19,11 +24,13 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                 <div tw='flex flex-col justify-between'>
                     {
                         dataPerChannel.slice(0, 3).map((item) => {
+                            const channel = channels[item.channel_id]
+
                             return (
                                 <img 
-                                    src={item.channel.photo}
-                                    tw="w-52 rounded-md" alt={`Photo for ${item.channel.name}`}
-                                    key={item.channel.channel_id}
+                                    src={channel.photo}
+                                    tw="w-52 rounded-md" alt={`Photo for ${channel.name}`}
+                                    key={channel.channel_id}
                                 />
                             )
                         })
@@ -54,8 +61,8 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
                     <div tw="grow flex flex-col">
                         <h3 tw="text-4xl font-bold">Top Channels</h3>
                         <div tw='flex'>
-                            <ChannelsColumn channels={dataPerChannel.filter((_, i) => i % 2 === 0)}/>
-                            <ChannelsColumn channels={dataPerChannel.filter((_, i) => i % 2 === 1)}/>
+                            <ChannelsColumn channelData={dataPerChannel.filter((_, i) => i % 2 === 0)} channels={channels}/>
+                            <ChannelsColumn channelData={dataPerChannel.filter((_, i) => i % 2 === 1)} channels={channels}/>
                         </div>
                     </div>
                     <p tw='text-3xl'>Find yours @ holorewind.com</p>
@@ -65,12 +72,13 @@ export default function RewindOpenGraphStyleImage({rewind}: RewindOpenGraphStyle
     )
 }
 
-const ChannelsColumn = ({channels}: {channels: Array<RewindDataItem<{channel: Channel}>>}) => {
+const ChannelsColumn = ({channelData, channels}: {channelData: Array<{key: number, channel_id: string}>, channels: Record<string, Channel>}) => {
     return (
         <div tw='flex flex-col w-1/2'>
-            {channels.slice(0, 10).map((item) => {
+            {channelData.slice(0, 10).map((item) => {
+                const channel = channels[item.channel_id]
                 return (
-                    <div tw='text-3xl mb-2' style={{display: 'block', lineClamp: 1}} key={item.channel.channel_id}>{item.channel.name}</div>
+                    <div tw='text-3xl mb-2' style={{display: 'block', lineClamp: 1}} key={channel.channel_id}>{channel.name}</div>
                 )
             })}
         </div>

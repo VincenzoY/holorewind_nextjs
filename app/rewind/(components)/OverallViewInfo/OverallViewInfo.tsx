@@ -1,16 +1,16 @@
 import { humanizeSeconds } from '@/lib/utils/utils';
 import { RewindContext } from '../../(context)/RewindContext';
 import { useContext } from 'react';
-import { RewindDataType } from '@/lib/rewind/rewind';
 
 interface OverallViewInfoProps {}
 
 export default function OverallViewInfo({}: OverallViewInfoProps) {
-    const rewindData = useContext(RewindContext) as RewindDataType
+    const rewindData = useContext(RewindContext)
+    if (!rewindData) return
 
     const year = rewindData.year
-    const { totalViews, uniqueViews, totalWatchTime } = rewindData.accumulatedVideoData
-    const { channelCount } = rewindData.accumulatedChannelData
+    const { total_view_count: totalViews, total_unique_videos_viewed: uniqueViews, total_video_watch_time: totalWatchTime } = rewindData
+    const { total_channel_count: channelCount } = rewindData
 
     return (
         <div className='min-h-dvh flex items-center align-center'>

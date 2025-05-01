@@ -1,11 +1,11 @@
 import FakeParagraph from "@/components/RewindComponents/FakeParagraph/FakeParagraph";
-import type { Channel } from "@/lib/pocketbase/pocketbase";
-import { humanizeSeconds } from "@/lib/utils/utils";
+import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils";
+import { useQuery } from "@tanstack/react-query";
 
 interface ChannelDetailFileProps {
     index: number | undefined
     value: string | undefined
-    channelDetails: Channel
+    channelId: string
 }
 
 const getPlacementBorderColour = (index: number | undefined) => {
@@ -18,30 +18,37 @@ const getPlacementBorderColour = (index: number | undefined) => {
 export default function ChannelDetailFile({
     index = undefined, 
     value = undefined,
-    channelDetails,
+    channelId,
 }: ChannelDetailFileProps) {
     const placementBorderColour = getPlacementBorderColour(index)
+
+    const { data: channel } = useQuery({
+        queryKey: ['fetchChannel', channelId],
+        queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId],
+    })
+
+    if (!channel) return
 
     return (
         <div className="aspect-[8.5/11] bg-[#f4f6f8] w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-2">
             <div>
                 <div className={`border-2 ${placementBorderColour} border-solid p-1 rounded-sm inline-block float-right ml-2`}>
-                    <a href={`https://www.youtube.com/channel/${channelDetails.channel_id}`} target="_blank">
+                    <a href={`https://www.youtube.com/channel/${channel.channel_id}`} target="_blank">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
-                            src={channelDetails.photo}
-                            className="w-20 h-20 line-clamp-3" alt={`Photo for ${channelDetails.name}`}
+                            src={channel.photo}
+                            className="w-20 h-20 line-clamp-3" alt={`Photo for ${channel.name}`}
                         />
                     </a>
                 </div>
                 <div>
-                    <h2 className="text-xl font-bold mb-1">{channelDetails.name}</h2>
+                    <h2 className="text-xl font-bold mb-1">{channel.name}</h2>
                     {value && <h4 className="text-sm">{value}</h4>}
-                    <h4 className="text-sm">Group: {channelDetails.group}</h4>
+                    <h4 className="text-sm">Group: {channel.group}</h4>
                 </div>
             </div>
             <div className="grow text-sm">
-                <FakeParagraph key={channelDetails.channel_id}/>
+                <FakeParagraph key={channel.channel_id}/>
             </div>
         </div>
     )
