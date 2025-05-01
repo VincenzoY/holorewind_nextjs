@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Slide } from 'react-toastify';
 import NiceModalProvider from "./(layout)/NiceModalProvider";
 import { Roboto } from 'next/font/google';
+import QueryClientContextProvider from "./(layout)/QueryClientProvider";
 
 const roboto = Roboto({
   weight: ['400', '700'],  // You can select weights
@@ -29,6 +30,7 @@ export default function RootLayout({
       <body
         className={`${roboto.className} antialiased`}
       >
+        <QueryClientContextProvider>
           <ToastContainer
             newestOnTop
             theme="dark"
@@ -38,6 +40,7 @@ export default function RootLayout({
             <Navigation />
             {children}
           </NiceModalProvider>
+        </QueryClientContextProvider>
       </body>
     </html>
   );
