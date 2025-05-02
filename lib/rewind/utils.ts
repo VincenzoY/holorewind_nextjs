@@ -4,15 +4,15 @@ import { RewindDataItem } from './rewind';
 export type HeapInfo<T> = {
     n: number
     type: "largest" | "smallest"
-    lambda: (item:T) => RewindDataItem<any>,
+    lambda: (item:T) => RewindDataItem,
 }
 
 interface HeapInfoWithHeap<T> extends HeapInfo<T> {
     heap: MinHeap
 }
 
-export function nLargestArray<T>(array: Array<T>, n: number, lambda: (item:T) => RewindDataItem<any>) {
-    const heap = new MinHeap<RewindDataItem<any>>([], {comparator: (a: RewindDataItem<any>, b: RewindDataItem<any>) => a.key - b.key})
+export function nLargestArray<T>(array: Array<T>, n: number, lambda: (item:T) => RewindDataItem) {
+    const heap = new MinHeap<RewindDataItem>([], {comparator: (a: RewindDataItem, b: RewindDataItem) => a.key - b.key})
 
     for(let i = 0; i < array.length; i++) {
         const result = lambda(array[i])
@@ -22,22 +22,22 @@ export function nLargestArray<T>(array: Array<T>, n: number, lambda: (item:T) =>
     }
 
     const nLargest = []
-    for(let item: RewindDataItem<any> | undefined = heap.poll(); item !== undefined; item = heap.poll()) {
+    for(let item: RewindDataItem | undefined = heap.poll(); item !== undefined; item = heap.poll()) {
         nLargest.push(item)
     }
 
     return nLargest
 }
 
-export function nLargestObjects<T>(objects: Record<string, T>, properties: Record<string, HeapInfo<T>>): Record<string, Array<RewindDataItem<any>>> {
+export function nLargestObjects<T>(objects: Record<string, T>, properties: Record<string, HeapInfo<T>>): Record<string, Array<RewindDataItem>> {
     const heapData: Record<string, HeapInfoWithHeap<T>> = {}
     for (const propertyId in properties) {
         heapData[propertyId] = {
             ...(properties[propertyId]),
             heap: (
                 properties[propertyId]["type"] === "largest" ? 
-                new MinHeap<RewindDataItem<any>>([], {comparator: (a: RewindDataItem<any>, b: RewindDataItem<any>) => a.key - b.key}) : 
-                new MinHeap<RewindDataItem<any>>([], {comparator: (a: RewindDataItem<any>, b: RewindDataItem<any>) => b.key - a.key})
+                new MinHeap<RewindDataItem>([], {comparator: (a: RewindDataItem, b: RewindDataItem) => a.key - b.key}) : 
+                new MinHeap<RewindDataItem>([], {comparator: (a: RewindDataItem, b: RewindDataItem) => b.key - a.key})
             )
         }
     }
@@ -54,7 +54,7 @@ export function nLargestObjects<T>(objects: Record<string, T>, properties: Recor
         }
     }
 
-    const data: Record<string, Array<RewindDataItem<any>>> = {}
+    const data: Record<string, any> = {}
 
     for (const propertyId in properties) {
         const nLargest = []

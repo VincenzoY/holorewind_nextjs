@@ -1,69 +1,63 @@
-import { DecoratedChannelData, DecoratedVideoWithChannelData } from "../watchHistory/fetchRecords/fetchRecords"
-import { Channel, VideoWithChannel } from "../pocketbase/pocketbase"
+import { DecoratedChannelData, DecoratedVideoData } from "../watchHistory/fetchRecords/fetchRecords"
+import { VideoWithChannel } from "../pocketbase/pocketbase"
 import { type HeapInfo, type AccumulatorInfo, nLargestObjects, reduce } from "./utils"
 
-export interface RewindDataType {
-    year: number,
-    specificVideoData: Record<string, Array<RewindDataItem<{video: VideoWithChannel}>>>,
-    specificChannelData: Record<string, Array<RewindDataItem<{channel: Channel}>>>,
-    accumulatedVideoData: Record<string, any>,
-    accumulatedChannelData: Record<string, any>,
-}
-
-export type RewindDataItem<T> = T & {
-    key: number
-}
-
+export type RewindDataType = Record<string, any>
 interface GenerateRewindParamsType {
-    videoData: Record<string, DecoratedVideoWithChannelData>
+    videoData: Record<string, DecoratedVideoData>
     channelData: Record<string, DecoratedChannelData>
 }
 
+export interface RewindDataItem {
+    key: any
+    [data: string]: any
+}
+
 export async function generateRewind({videoData, channelData}: GenerateRewindParamsType, year: number): Promise<RewindDataType> {
-    const videoFilters: Record<string, HeapInfo<DecoratedVideoWithChannelData>> = {
-        "totalWatchTime": {
+    const videoFilters: Record<string, HeapInfo<DecoratedVideoData>> = {
+        "video_watch_time": {
             "n": 15,
             "type": "largest",
-            "lambda": ({video, watchHistory}) => ({key: watchHistory.totalWatchTime, video: video})
+            "lambda": ({video, watchHistory}) => ({key: watchHistory.totalWatchTime, video_id: video.video_id})
         },
-        "views": {
+        "video_views": {
             "n": 15,
             "type": "largest",
-            "lambda": ({video, watchHistory}) => ({key: watchHistory.watchHistory.length, video: video})
+            "lambda": ({video, watchHistory}) => ({key: watchHistory.watchHistory.length, video_id: video.video_id})
         },
     }
 
-    const videoAccumulationFilters: Record<string, AccumulatorInfo<DecoratedVideoWithChannelData, any>> = {
-        "totalViews": {
+    const videoAccumulationFilters: Record<string, AccumulatorInfo<DecoratedVideoData, any>> = {
+        "total_view_count": {
             "initialValue": 0,
             "reducer": (item, acc) => acc + item.watchHistory.watchHistory.length
         },
-        "uniqueViews": {
+        "total_unique_videos_viewed": {
             "initialValue": 0,
             "reducer": (_, acc) => acc + 1
         },
-        "totalWatchTime": {
+        "total_video_watch_time": {
             "initialValue": 0,
             "reducer": (item, acc) => acc + item.watchHistory.totalWatchTime
         },
-        "earliestVideo": {
+        "earliest_video": {
             "initialValue": undefined,
-            "reducer": ({video, watchHistory}, acc: {video: VideoWithChannel, earliestView: string}) => {
+            "reducer": ({video, watchHistory}, acc: {video_id: string, earliest_view: string}) => {
                 const videoWatchHistory = watchHistory.watchHistory
 
                 const formattedReturn = {
-                    video: video, 
-                    earliestView: videoWatchHistory[videoWatchHistory.length - 1][0]
+                    video_id: video.video_id, 
+                    earliest_view: videoWatchHistory[videoWatchHistory.length - 1][0]
                 }
 
                 if (!acc) return formattedReturn
 
-                if (Date.parse(formattedReturn.earliestView) > Date.parse(acc.earliestView)) return acc
+                if (Date.parse(formattedReturn.earliest_view) > Date.parse(acc.earliest_view)) return acc
 
                 return formattedReturn
             }
         },
-        "viewsByMonth": {
+        "views_by_month": {
             "initialValue": Array(12).fill(0),
             "reducer": (item, acc) => {
                 for(const [start, _] of item.watchHistory.watchHistory) {
@@ -77,27 +71,27 @@ export async function generateRewind({videoData, channelData}: GenerateRewindPar
     }
 
     const channelFilters: Record<string, HeapInfo<DecoratedChannelData>> = {
-        "totalWatchTime": {
+        "channel_watch_time": {
             "n": 15,
             "type": "largest",
-            "lambda": ({channel, watchHistory}) => ({key: watchHistory.totalWatchTime, channel: channel})
+            "lambda": ({channel, watchHistory}) => ({key: watchHistory.totalWatchTime, channel_id: channel.channel_id})
         },
-        "views": {
+        "channel_views": {
             "n": 15,
             "type": "largest",
-            "lambda": ({channel, watchHistory}) => ({key: watchHistory.views, channel: channel})
+            "lambda": ({channel, watchHistory}) => ({key: watchHistory.views, channel_id: channel.channel_id})
         },
-        "uniqueViews": {
+        "channel_unique_views": {
             "n": 15,
             "type": "largest",
-            "lambda": ({channel, watchHistory}) => ({key: watchHistory.uniqueViews, channel: channel})
+            "lambda": ({channel, watchHistory}) => ({key: watchHistory.uniqueViews, channel_id: channel.channel_id})
         },
     }
 
     const channelAccumulationFilters: Record<string, AccumulatorInfo<DecoratedChannelData, number>> = {
-        "channelCount": {
+        "total_channel_count": {
             "initialValue": 0,
-            "reducer": (item, acc) => acc + 1
+            "reducer": (_, acc) => acc + 1
         }
     }
 
@@ -108,9 +102,9 @@ export async function generateRewind({videoData, channelData}: GenerateRewindPar
 
     return {
         year,
-        specificVideoData: specificVideoData,
-        specificChannelData: specificChannelData,
-        accumulatedVideoData: accumulatedVideoData,
-        accumulatedChannelData: accumulatedChannelData,
+        ...specificVideoData,
+        ...specificChannelData,
+        ...accumulatedVideoData,
+        ...accumulatedChannelData,
     }
 }

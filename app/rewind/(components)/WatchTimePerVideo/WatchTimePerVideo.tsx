@@ -1,20 +1,20 @@
 import VideoDetailFile from "@/components/RewindComponents/VideoDetails/VideoDetailFile/VideoDetailFile"
 import VideoDetailListFile from "@/components/RewindComponents/VideoDetails/VideoDetailListFile/VideoDetailListFile"
-import { RewindDataType } from "@/lib/rewind/rewind"
 import { humanizeSeconds } from "@/lib/utils/utils"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
+import { RewindDataType } from "@/lib/rewind/rewind"
 
 interface WatchTimePerVideoProps {}
 
 const WatchTimePerVideo: React.FC<WatchTimePerVideoProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
 
-    const watchTimePerVideo = rewindData.specificVideoData.totalWatchTime
+    const videoWatchTime: Array<{ key: number, video_id: string }> = rewindData.video_watch_time
 
-    const SpecificFiles = watchTimePerVideo.slice(0, 3).map((item, index) => {
+    const SpecificFiles = videoWatchTime.slice(0, 3).map((item, index) => {
         return (
-            <VideoDetailFile key={index} index={index} value={`Watch Time: ${keyToString(item.key)}`} videoDetails={item.video}/>
+            <VideoDetailFile key={index} index={index} value={`Watch Time: ${keyToString(item.key)}`} videoId={item.video_id}/>
         )
     })
 
@@ -27,7 +27,7 @@ const WatchTimePerVideo: React.FC<WatchTimePerVideoProps> = () => {
 
                 <div className="flex flex-wrap gap-6 2xl:w-full lg:w-[750px] w-[360px]">
                     {SpecificFiles}
-                    <VideoDetailListFile title="Video Watch Time" videoDetailList={watchTimePerVideo} keyToDisplayString={keyToString} />
+                    <VideoDetailListFile title="Video Watch Time" videoDetailList={videoWatchTime} keyToDisplayString={keyToString} />
                 </div>
             </div>
             <p className="text-page-white text-md font-bold">* See `Help` / `?` Drawer</p>
@@ -35,8 +35,6 @@ const WatchTimePerVideo: React.FC<WatchTimePerVideoProps> = () => {
     )
 }
 
-const keyToString = (key: number) => {
-    return humanizeSeconds(key)
-}
+const keyToString = (key: number) => humanizeSeconds(key)
 
 export default WatchTimePerVideo

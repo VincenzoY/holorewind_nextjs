@@ -9,13 +9,13 @@ interface ViewsPerChannelProps {}
 const ViewsPerChannel: React.FC<ViewsPerChannelProps> = () => {
     const rewindData = useContext(RewindContext) as RewindDataType
 
-    const viewsPerChannel = rewindData.specificChannelData.views
+    const viewsPerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_views
 
     if (!viewsPerChannel) return
 
     const SpecificFiles = viewsPerChannel.slice(0, 3).map((item, index) => {
         return (
-            <ChannelDetailFile key={index} index={index} value={`Views: ${item.key}`} channelDetails={item.channel}/>
+            <ChannelDetailFile key={index} index={index} value={`Views: ${item.key}`} channelId={item.channel_id}/>
         )
     })
 

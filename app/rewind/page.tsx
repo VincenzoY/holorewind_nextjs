@@ -22,9 +22,5 @@ export default function Page() {
 
     if(!mounted || !localRewindData) return <></>
 
-    return (
-        <>
-            <RewindComponent rewind={localRewindData} />
-        </>
-    )
+    return <RewindComponent rewind={localRewindData} />
 }
