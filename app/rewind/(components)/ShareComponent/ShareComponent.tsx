@@ -17,12 +17,10 @@ interface ShareComponentProps {
 
 export default function ShareComponent({ rewindId: rewindIdParam }: ShareComponentProps) {
     const rewindData = useContext(RewindContext) as RewindDataType
-    const { total_unique_videos_viewed: uniqueViews } = rewindData
-    const { total_channel_count: channelCount } = rewindData
+    const { total_unique_videos_viewed: uniqueViews, total_channel_count: channelCount } = rewindData
     // initial launch didn't include viewsPerChannel so must keep watchTimePerChannel for back compat
-    const watchTimePerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_watch_time
-    const uniqueViewsPerChannel: Array<{ key: number, channel_id: string }> = rewindData.channel_unique_views
-    const dataPerChannel = uniqueViewsPerChannel ?? watchTimePerChannel
+    const { channel_watch_time: watchTimePerChannel, channel_unique_views: uniqueViewsPerChannel} = rewindData
+    const dataPerChannel: Array<{ key: number, channel_id: string }> = uniqueViewsPerChannel ?? watchTimePerChannel
 
     const [rewindId, setRewindId] = useState(rewindIdParam)
     const [_, setStorageRewindId] = useLocalStorage<string>("rewindId")
@@ -175,12 +173,4 @@ function getRewindUrl(rewindId: string) {
         `https://${window.location.host}/rewind/${rewindId}` :
         `http://${window.location.host}/rewind/${rewindId}`
     )
-}
-
-function downloadImage(data: string, filename = 'holorewind.png') {
-    const a = document.createElement('a');
-    a.href = data;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
 }
