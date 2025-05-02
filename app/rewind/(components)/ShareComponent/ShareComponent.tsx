@@ -100,7 +100,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
 
                                             return (
                                                 <img 
-                                                    src={channel.photo}
+                                                    src={`https://holodex.net/statics/channelImg/${channel.channel_id}/100.png`}
                                                     className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${channel.name}`}
                                                     key={channel.channel_id}
                                                 />

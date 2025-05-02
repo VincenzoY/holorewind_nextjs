@@ -36,7 +36,7 @@ export default function ChannelDetailFile({
                     <a href={`https://www.youtube.com/channel/${channel.channel_id}`} target="_blank">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
-                            src={channel.photo}
+                            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/100.png`}
                             className="w-20 h-20 line-clamp-3" alt={`Photo for ${channel.name}`}
                         />
                     </a>

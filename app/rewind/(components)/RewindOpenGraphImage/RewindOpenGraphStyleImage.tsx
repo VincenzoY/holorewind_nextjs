@@ -28,7 +28,7 @@ export default function RewindOpenGraphStyleImage({rewind, channels}: RewindOpen
 
                             return (
                                 <img 
-                                    src={channel.photo}
+                                    src={`https://holodex.net/statics/channelImg/${channel.channel_id}/100.png`}
                                     tw="w-52 rounded-md" alt={`Photo for ${channel.name}`}
                                     key={channel.channel_id}
                                 />
