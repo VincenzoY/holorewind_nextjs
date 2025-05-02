@@ -70,43 +70,11 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                 <div>
                                     <h3 className="text-md font-bold">Top Channels</h3>
                                     <div className='grid grid-rows-5 grid-cols-2 gap-x-4 mr-2 ml-2'>
-                                        {dataPerChannel.slice(0, 10).map((item) => {
-                                            const channelId = item.channel_id
-                        
-                                            const { data: channel } = useQuery({ 
-                                                queryKey: ['fetchChannel', channelId], 
-                                                queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
-                                            })
-                        
-                                            if (!channel) return
-                                            
-                                            return (
-                                                <div className='truncate text-sm' key={channel.channel_id}>{channel.name}</div>
-                                            )
-                                        })}
+                                        {dataPerChannel.slice(0, 10).map((item) => <ChannelList channelId={item.channel_id} key={item.channel_id} />)}
                                     </div>
                                 </div>
                                 <div className='flex justify-around'>
-                                    {
-                                        dataPerChannel.slice(0, 3).map((item) => {
-                                            const channelId = item.channel_id
-                        
-                                            const { data: channel } = useQuery({ 
-                                                queryKey: ['fetchChannel', channelId], 
-                                                queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
-                                            })
-                        
-                                            if (!channel) return
-
-                                            return (
-                                                <img 
-                                                    src={channel.photo}
-                                                    className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${channel.name}`}
-                                                    key={channel.channel_id}
-                                                />
-                                            )
-                                        })
-                                    }
+                                    {dataPerChannel.slice(0, 3).map((item) => <ChannelThumbnail channelId={item.channel_id} key={item.channel_id} />)}
                                 </div>
                                 <p className='text-xs'>Find yours @ holorewind.com</p>
                             </div>
@@ -133,6 +101,35 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                 </div>
             </div>
         </>
+    )
+}
+
+const ChannelThumbnail = ({channelId}: {channelId: string}) => {      
+    const { data: channel } = useQuery({ 
+        queryKey: ['fetchChannel', channelId], 
+        queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
+    })
+                        
+    if (!channel) return
+
+    return (
+        <img 
+            src={channel.photo}
+            className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${channel.name}`}
+        />
+    )
+}
+
+const ChannelList = ({channelId}: {channelId: string}) => {
+    const { data: channel } = useQuery({ 
+        queryKey: ['fetchChannel', channelId], 
+        queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId]
+    })
+                        
+    if (!channel) return
+                                            
+    return (
+        <div className='truncate text-sm'>{channel.name}</div>
     )
 }
 
