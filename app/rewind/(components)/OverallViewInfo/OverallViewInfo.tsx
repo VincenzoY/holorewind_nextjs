@@ -1,7 +1,7 @@
 import { humanizeSeconds } from '@/lib/utils/utils';
 import { RewindContext } from '../../(context)/RewindContext';
 import { useContext } from 'react';
-import { RewindDataType } from '@/lib/rewind/rewind';
+import { RewindDataType } from '@/lib/rewind/rewindData/rewindData';
 
 interface OverallViewInfoProps {}
 

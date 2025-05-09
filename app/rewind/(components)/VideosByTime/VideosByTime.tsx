@@ -1,7 +1,7 @@
 'use client'
 
 import VideoDetailFile from "@/components/RewindComponents/VideoDetails/VideoDetailFile/VideoDetailFile"
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 import { useContext, useEffect, useRef } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
 import { Channel, VideoWithChannel } from "@/lib/pocketbase/pocketbase"

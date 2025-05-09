@@ -1,6 +1,6 @@
 import ChannelDetailFile from "@/components/RewindComponents/ChannelDetails/ChannelDetailFile/ChannelDetailFile"
 import ChannelDetailListFile from "@/components/RewindComponents/ChannelDetails/ChannelDetailFileList/ChannelDetailListFile"
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 import { humanizeSeconds } from "@/lib/utils/utils"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"

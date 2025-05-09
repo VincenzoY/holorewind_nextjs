@@ -1,4 +1,4 @@
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
 import ChannelDetailFile from "@/components/RewindComponents/ChannelDetails/ChannelDetailFile/ChannelDetailFile"

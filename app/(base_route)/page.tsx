@@ -5,16 +5,14 @@ import Button from "@/components/GenericComponents/Button/Button";
 import { useLocalStorage } from "@/lib/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify"
-import { fetchRecords } from "@/lib/watchHistory/fetchRecords/fetchRecords";
-import { RewindDataType, generateRewind } from "@/lib/rewind/rewind";
-import { formatWatchHistory } from "@/lib/watchHistory/formatWatchHistory/formatWatchHistory";
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData";
 import NiceModal from "@ebay/nice-modal-react";
 import GuideDrawer from "@/components/RewindComponents/Drawers/GuideDrawer/GuideDrawer";
 import Link from "next/link";
 import MainLogo from "@/components/Icons/MainLogo/MainLogo";
-import { createRewindCreationStat } from "@/lib/pocketbase/utils";
-import {default as TextLink} from "@/components/GenericComponents/Link/Link"
+import TextLink from "@/components/GenericComponents/Link/Link"
 import PrivacyPolicyDrawer from "@/components/RewindComponents/Drawers/PrivacyPolicyDrawer/PrivacyPolicyDrawer";
+import { RewindDataOptions, getRewindData } from "@/lib/rewind/rewind";
 
 export default function Page() {
   const [, setRewindId] = useLocalStorage<string>("rewindId")
@@ -29,6 +27,8 @@ export default function Page() {
     router.push("/rewind")
   }
 
+  const options: RewindDataOptions = { year: 2024, includedData: 'all' }
+
   return (
     <div className="w-full flex items-center justify-center h-dvh relative">
       <div className="flex flex-col items-center gap-8 w-full">
@@ -39,7 +39,12 @@ export default function Page() {
                   <Button onClick={() => fileUploadRef.current?.click()} className="w-[200px] md:w-auto">
                       Upload Watch History
                   </Button>
-                  <input className="hidden" type="file" ref={fileUploadRef} onChange={(e) => handleFileChange(e, fileSuccessCallback)}/>
+                  <input 
+                    className="hidden" 
+                    type="file" 
+                    ref={fileUploadRef} 
+                    onChange={(e) => handleFileChange(e.target.files, options, fileSuccessCallback)}
+                  />
               </div>
               <div>
                   <Button onClick={() => NiceModal.show(GuideDrawer)} className="w-[200px] md:w-auto">
@@ -62,50 +67,21 @@ export default function Page() {
   )
 }
 
-const handleFileChange = async (e: ChangeEvent<HTMLInputElement>, successCallback: (rewindData: RewindDataType) => void) => {
-  const files = e.target.files
+const handleFileChange = async (
+  files: FileList | null,
+  options: RewindDataOptions,
+  successCallback: (rewindData: RewindDataType) => void
+) => {
   if (!files) return
 
   const response = toast.promise(
-    getRewindData(files),
+    getRewindData(files, options),
     {
-      pending: {
-        render() {
-          return "Loading..."
-        },
-      },
-      success: {
-        render() {
-          return "Success!"
-        }
-      },
-      error: {
-        // eslint-disable-next-line  @typescript-eslint/no-explicit-any
-        render({data}: {data: any}) {
-          // When the promise reject, data will contains the error
-          return data.message
-        }
-      }
+      pending: { render() { return "Loading..." } },
+      success: { render() { return "Success!" } },
+      error: { render({data}: {data: Error}) { return data.message } }
     }
   )
 
-  try {
-    successCallback(await response)
-  } catch (e) {
-    console.error(e)
-  }
-}
-
-async function getRewindData(files: FileList): Promise<RewindDataType> {
-    if (files.length == 0) { throw new Error(`No file found.`); }
-  
-    const file = files[0]
-    const watchHistory = await file.text()
-    const formattedWatchHistory = formatWatchHistory(watchHistory, 2024)
-    const watchHistoryWithData = await fetchRecords(formattedWatchHistory)
-    const rewindData = await generateRewind(watchHistoryWithData, 2024)
-
-    await createRewindCreationStat()
-        
-    return rewindData
+  successCallback(await response)
 }

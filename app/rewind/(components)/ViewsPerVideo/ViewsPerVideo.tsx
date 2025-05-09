@@ -2,7 +2,7 @@ import VideoDetailFile from "@/components/RewindComponents/VideoDetails/VideoDet
 import VideoDetailListFile from "@/components/RewindComponents/VideoDetails/VideoDetailListFile/VideoDetailListFile"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 
 interface ViewsPerVideoProps {}
 

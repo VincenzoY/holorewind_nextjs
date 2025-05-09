@@ -1,5 +1,5 @@
 import { MinHeap } from 'heap-typed';
-import { RewindDataItem } from './rewind';
+import { RewindDataItem } from './rewindData';
 
 export type HeapInfo<T> = {
     n: number

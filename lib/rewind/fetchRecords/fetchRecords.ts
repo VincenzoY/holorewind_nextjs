@@ -1,6 +1,5 @@
-import type { Video, Channel, VideoWithChannel } from "@/lib/pocketbase/pocketbase"
-import { fetchAllRecordsInCollection } from "@/lib/pocketbase/pocketbase"
-import { FormattedWatchHistory } from "../formatWatchHistory/formatWatchHistory"
+import type { Video, Channel } from "@/lib/pocketbase/pocketbase"
+import { FormattedWatchHistory } from "@/lib/rewind/formatWatchHistory/formatWatchHistory"
 import { fetchChannelByChannelIds, fetchVideosByVideoIdsInParallel } from "../../pocketbase/utils"
 
 export interface VideoWatchHistory {

@@ -1,6 +1,5 @@
 import { getPeriodFromYear } from "../../utils/utils"
-
-type DateFilter = {startTime: string | undefined, endTime: string | undefined}
+import { RewindDataOptions } from "../rewind"
 
 export interface WatchHistoryEntry {
     "header": "YouTube" | "YouTube Music",
@@ -24,7 +23,9 @@ export interface FormattedWatchHistoryEntry {
     channelId?: string
 }
 
-export function formatWatchHistory(watchHistory: string, year: number) {
+export function formatWatchHistory(watchHistory: string, options: RewindDataOptions) {
+    const { year, includedData } = options
+
     const [startTime, endTime] = getPeriodFromYear(year)
 
     let watchHistoryJSON: Array<WatchHistoryEntry> = []
@@ -47,6 +48,10 @@ export function formatWatchHistory(watchHistory: string, year: number) {
         const time = watch_record["time"];
         
         if (!videoMatch || !time) { return; }
+
+        const header = watch_record.header
+        const shouldNotIncludeData = (includedData == "music" && header == "YouTube") || (includedData == "video" && header == "YouTube Music")
+        if (shouldNotIncludeData) { return; }
         
         if((startTimeDate && Date.parse(time) < startTimeDate) || (endTimeDate && Date.parse(time) > endTimeDate)) { return; }
 

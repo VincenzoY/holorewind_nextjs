@@ -1,6 +1,6 @@
 import PocketBase, { RecordModel } from 'pocketbase';
 import { RecordService } from 'pocketbase'
-import { RewindDataType } from '../rewind/rewind';
+import { RewindDataType } from '@/lib/rewind/rewindData/rewindData';
 
 interface PocketBaseDefaultFields {
     id: string,

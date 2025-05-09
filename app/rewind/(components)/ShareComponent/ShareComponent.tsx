@@ -2,7 +2,7 @@
 
 import { RewindContext } from '../../(context)/RewindContext';
 import { useContext, useState } from 'react';
-import { RewindDataType } from '@/lib/rewind/rewind';
+import { RewindDataType } from '@/lib/rewind/rewindData/rewindData';
 import BlankFile from '@/components/RewindComponents/BlankFile/BlankFile';
 import { createRewind, fetchChannelByChannelIds } from '@/lib/pocketbase/utils';
 import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';

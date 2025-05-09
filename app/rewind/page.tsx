@@ -3,7 +3,7 @@
 import { useLocalStorage } from "@/lib/hooks/useLocalStorage"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 import RewindComponent from "./(components)/RewindComponent/RewindComponent"
 
 export default function Page() {

@@ -3,7 +3,7 @@ import VideoDetailListFile from "@/components/RewindComponents/VideoDetails/Vide
 import { humanizeSeconds } from "@/lib/utils/utils"
 import { useContext } from "react"
 import { RewindContext } from "../../(context)/RewindContext"
-import { RewindDataType } from "@/lib/rewind/rewind"
+import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 
 interface WatchTimePerVideoProps {}
 
