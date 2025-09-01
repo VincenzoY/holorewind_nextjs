@@ -12,13 +12,17 @@ export interface PageProps {
 export async function generateMetadata(
     { params: {id} }: PageProps
 ): Promise<Metadata> {
-    const { rewind: { year } } = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id)
+    try {
+        const { rewind: { year } } = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id)
    
-    return {
-      openGraph: {
-        title: `My ${year + " " || ""}HoloLive Rewind`,
-        description: "This is who I was watching this year. Find yours too!",
-      },
+        return {
+        openGraph: {
+            title: `My ${year + " " || ""}HoloLive Rewind`,
+            description: "This is who I was watching this year. Find yours too!",
+        },
+        }
+    } catch {
+        return {};
     }
 }
 
