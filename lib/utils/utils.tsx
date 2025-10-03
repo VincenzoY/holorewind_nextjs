@@ -10,3 +10,7 @@ export const getPeriodFromYear = (year: number) => {
         new Date(year, 11, 31, 23, 59, 59).toISOString()
     ]
 }
+
+export const isOnServer = () => {
+    return typeof window === 'undefined'
+}

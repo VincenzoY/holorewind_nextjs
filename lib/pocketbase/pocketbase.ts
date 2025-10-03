@@ -1,6 +1,9 @@
-import PocketBase, { RecordModel } from 'pocketbase';
+import PocketBase, { ListResult } from 'pocketbase';
 import { RecordService } from 'pocketbase'
 import { RewindDataType } from '@/lib/rewind/rewindData/rewindData';
+import { RewindFilterDataType } from '@/lib/rewind/filterRewind/filterRewind';
+import { isOnServer } from '../utils/utils';
+import { loginAsAdmin } from './server/login';
 
 interface PocketBaseDefaultFields {
     id: string,
@@ -26,6 +29,7 @@ export interface VideoDBEntry extends Video, PocketBaseDefaultFields {}
 
 export interface Channel {
     channel_id: string,
+    org: string,
     name: string,
     group: string,
     photo: string,
@@ -45,76 +49,102 @@ export interface Stats {
 
 export interface StatsDBEntry extends Stats, PocketBaseDefaultFields {}
 
+export interface Filters {
+    filter_data: RewindFilterDataType
+}
+
+export interface FiltersDBEntry extends Filters, PocketBaseDefaultFields {}
+
 export interface TypedPocketBase extends PocketBase {
     collection(idOrName: string): RecordService // default fallback for any other collection
     collection(idOrName: 'channels'): RecordService<ChannelDBEntry>
     collection(idOrName: 'videos'): RecordService<VideoDBEntry>
     collection(idOrName: 'rewinds'): RecordService<RewindDBEntry>
+    collection(idOrName: 'filters'): RecordService<FiltersDBEntry>
 }
 
-const POCKETBASE_ADDRESS = process.env.NEXT_PUBLIC_POCKETBASE_ADDRESS;
+export const PAGE_SIZE = 100;
 
-const pb = new PocketBase(POCKETBASE_ADDRESS) as TypedPocketBase;
+export class PocketBaseWrapper {
+    static POCKETBASE_ADDRESS = process.env.NEXT_PUBLIC_POCKETBASE_ADDRESS;
+    static PAGE_SIZE = PAGE_SIZE
 
-export default pb
+    basePocketBase: PocketBase
 
-export const PAGE_SIZE = 500
-
-export async function fetchRecordsFromCollectionByCustomField(
-    collection: string, 
-    id: string, 
-    values: Array<any>,
-    fields?: Array<string>
-): Promise<Array<RecordModel>> {
-    let page_num = 0
-    let page = values.slice(page_num * PAGE_SIZE, (page_num + 1) * PAGE_SIZE)
-    const records: Array<RecordModel> = []
-    for(; 
-        page.length > 0; 
-        page_num += 1, page = values.slice(page_num * PAGE_SIZE, (page_num + 1) * PAGE_SIZE)
-    ) {
-        records.concat((await pb.collection(collection).getList(1, PAGE_SIZE, {
-            filter: page.map((value) => `${id}="${value}"`).join("||"),
-            ...(fields && {fields: fields.join(',')})
-        }))["items"])
+    constructor() {
+        this.basePocketBase = new PocketBase(PocketBaseWrapper.POCKETBASE_ADDRESS) as TypedPocketBase;
+        this.basePocketBase.autoCancellation(false)
     }
 
-    return records
-}
+    loginAsAdmin() {
+        loginAsAdmin(pb.basePocketBase)
+    }
 
-export async function fetchAllRecordsInCollection<T>(
-    collection: string,
-    params: object = {}
-): Promise<Array<T>> {
-    const records = []
-    let pageNum = 1
-
-    while(true) {
-        const collectionsFetch = (await pb.collection(collection).getList<T>(pageNum, PAGE_SIZE, params))
-
-        for(const record of collectionsFetch["items"]) {
-            records.push(record)
+    async fetchRecordsFromCollectionByCustomField<T>(
+        collection: string, 
+        id: string, 
+        values: Array<any>,
+        fields?: Array<string>
+    ): Promise<Array<T>> {
+        let page_num = 0
+        let page = values.slice(page_num * PocketBaseWrapper.PAGE_SIZE, (page_num + 1) * PocketBaseWrapper.PAGE_SIZE)
+        const requests: Array<Promise<ListResult<T>>> = []
+        for(; 
+            page.length > 0; 
+            page_num += 1, page = values.slice(page_num * PocketBaseWrapper.PAGE_SIZE, (page_num + 1) * PocketBaseWrapper.PAGE_SIZE)
+        ) {
+            requests.push(this.basePocketBase.collection(collection).getList<T>(1, PocketBaseWrapper.PAGE_SIZE, {
+                filter: page.map((value) => `${id}="${value}"`).join("||"),
+                ...(fields && {fields: fields.join(',')})
+            }))
         }
 
-        if (collectionsFetch["page"] === collectionsFetch["totalPages"]) break
+        return new Promise(async (resolve) => {
+            const responses = await Promise.all(requests)
 
-        pageNum += 1
+            resolve(responses.map((response) => response["items"]).flat())
+        })
     }
 
-    return records
+    async fetchAllRecordsInCollection<T>(
+        collection: string,
+        params: object = {}
+    ): Promise<Array<T>> {
+        const records = []
+        let pageNum = 1
+
+        while(true) {
+            const collectionsFetch = (await this.basePocketBase.collection(collection).getList<T>(pageNum, PocketBaseWrapper.PAGE_SIZE, params))
+
+            for(const record of collectionsFetch["items"]) {
+                records.push(record)
+            }
+
+            if (collectionsFetch["page"] === collectionsFetch["totalPages"]) break
+
+            pageNum += 1
+        }
+
+        return records
+    }
+
+    async fetchRecordFromCollectionById<T>(
+        collection: string, 
+        id: string, 
+        params: object = {}
+    ): Promise<T> {
+        return await this.basePocketBase.collection(collection).getOne(id, params)
+    }
+
+    async createRecordInCollection<T>(
+        collection: string,
+        value: Record<string, any> | FormData
+    ): Promise<T> {
+        return await this.basePocketBase.collection(collection).create(value)
+    }
+
 }
 
-export async function fetchRecordFromCollectionById<T>(
-    collection: string, 
-    id: string, 
-    params: object = {}
-): Promise<T> {
-    return await pb.collection(collection).getOne(id, params)
-}
+const pb = new PocketBaseWrapper()
 
-export async function createRecordInCollection<T>(
-    collection: string,
-    value: Record<string, any> | FormData
-): Promise<T> {
-    return await pb.collection(collection).create(value)
-}
+export default pb

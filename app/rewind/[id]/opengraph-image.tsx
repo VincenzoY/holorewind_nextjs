@@ -1,9 +1,9 @@
 import { ImageResponse } from 'next/og'
 import RewindOpenGraphStyleImage from '../(components)/RewindOpenGraphImage/RewindOpenGraphStyleImage'
-import { RewindDBEntry, fetchRecordFromCollectionById } from '@/lib/pocketbase/pocketbase'
+import { RewindDBEntry } from '@/lib/pocketbase/pocketbase'
 import { PageProps } from './page'
 import { notFound } from 'next/navigation'
-import { fetchChannelByChannelIds } from '@/lib/pocketbase/utils'
+import ClientPocketbase, { fetchChannelByChannelIds } from '@/lib/pocketbase/client/pocketbase_client'
  
 export const runtime = 'edge'
 
@@ -20,7 +20,7 @@ export const contentType = 'image/png'
 export default async function Image(
   { params: {id} }: PageProps
 ) {
-  const { rewind } = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
+  const { rewind } = await ClientPocketbase.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
   const dataPerChannel: Array<{key: number, channel_id: string}> = rewind.channel_unique_views ?? rewind.channel_watch_time
   const channels = await fetchChannelByChannelIds(dataPerChannel.map(item => item.channel_id))
 
