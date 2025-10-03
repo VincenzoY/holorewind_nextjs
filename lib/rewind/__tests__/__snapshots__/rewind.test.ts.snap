@@ -1,0 +1,339 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`getRewindData > should generate rewind data from watch history file 1`] = `
+{
+  "channel_unique_views": [
+    {
+      "channel_id": "UCL_qhgtOy0dy1Agp8vkySQg",
+      "key": 103,
+    },
+    {
+      "channel_id": "UC8rcEBzJSleTkf_-agPM20g",
+      "key": 53,
+    },
+    {
+      "channel_id": "UCmbs8T6MWqUHP1tIQvSgKrg",
+      "key": 53,
+    },
+    {
+      "channel_id": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "key": 46,
+    },
+    {
+      "channel_id": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "key": 42,
+    },
+    {
+      "channel_id": "UC_sFNM0z0MWm9A6WlKPuMMg",
+      "key": 38,
+    },
+    {
+      "channel_id": "UCotXwY6s8pWmuWd_snKYjhg",
+      "key": 38,
+    },
+    {
+      "channel_id": "UC3n5uGu18FoCy23ggWWp8tA",
+      "key": 36,
+    },
+    {
+      "channel_id": "UCDHABijvPBnJm7F-KlNME3w",
+      "key": 30,
+    },
+    {
+      "channel_id": "UCt9H_RpQzhxzlyBxFqrdHqA",
+      "key": 27,
+    },
+    {
+      "channel_id": "UCHsx4Hqa-1ORjQTh9TYDhww",
+      "key": 26,
+    },
+    {
+      "channel_id": "UCvN5h1ShZtc7nly3pezRayg",
+      "key": 21,
+    },
+    {
+      "channel_id": "UCoSrY_IQQVpmIRZ9Xf-y93g",
+      "key": 21,
+    },
+    {
+      "channel_id": "UCMwGHR0BTZuLsmjY_NT5Pwg",
+      "key": 20,
+    },
+    {
+      "channel_id": "UC9p_lqQ0FEDz327Vgf5JwqA",
+      "key": 12,
+    },
+  ],
+  "channel_views": [
+    {
+      "channel_id": "UCL_qhgtOy0dy1Agp8vkySQg",
+      "key": 496,
+    },
+    {
+      "channel_id": "UC_sFNM0z0MWm9A6WlKPuMMg",
+      "key": 357,
+    },
+    {
+      "channel_id": "UC8rcEBzJSleTkf_-agPM20g",
+      "key": 314,
+    },
+    {
+      "channel_id": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "key": 244,
+    },
+    {
+      "channel_id": "UCotXwY6s8pWmuWd_snKYjhg",
+      "key": 238,
+    },
+    {
+      "channel_id": "UCCzUftO8KOVkV4wQG1vkUvg",
+      "key": 205,
+    },
+    {
+      "channel_id": "UCMwGHR0BTZuLsmjY_NT5Pwg",
+      "key": 152,
+    },
+    {
+      "channel_id": "UCHsx4Hqa-1ORjQTh9TYDhww",
+      "key": 144,
+    },
+    {
+      "channel_id": "UC3n5uGu18FoCy23ggWWp8tA",
+      "key": 142,
+    },
+    {
+      "channel_id": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "key": 130,
+    },
+    {
+      "channel_id": "UCmbs8T6MWqUHP1tIQvSgKrg",
+      "key": 103,
+    },
+    {
+      "channel_id": "UCt9H_RpQzhxzlyBxFqrdHqA",
+      "key": 76,
+    },
+    {
+      "channel_id": "UCyl1z3jo3XHR1riLFKG5UAg",
+      "key": 71,
+    },
+    {
+      "channel_id": "UCDHABijvPBnJm7F-KlNME3w",
+      "key": 66,
+    },
+    {
+      "channel_id": "UCO_aKKYxn4tvrqPjcTzZ6EQ",
+      "key": 66,
+    },
+  ],
+  "channel_watch_time": [
+    {
+      "channel_id": "UCL_qhgtOy0dy1Agp8vkySQg",
+      "key": 96914,
+    },
+    {
+      "channel_id": "UC_sFNM0z0MWm9A6WlKPuMMg",
+      "key": 62437,
+    },
+    {
+      "channel_id": "UC8rcEBzJSleTkf_-agPM20g",
+      "key": 61363,
+    },
+    {
+      "channel_id": "UCotXwY6s8pWmuWd_snKYjhg",
+      "key": 55504,
+    },
+    {
+      "channel_id": "UCCzUftO8KOVkV4wQG1vkUvg",
+      "key": 45164,
+    },
+    {
+      "channel_id": "UC5CwaMl1eIgY8h02uZw7u8A",
+      "key": 44849,
+    },
+    {
+      "channel_id": "UCmbs8T6MWqUHP1tIQvSgKrg",
+      "key": 34040,
+    },
+    {
+      "channel_id": "UCgmPnx-EEeOrZSg5Tiw7ZRQ",
+      "key": 33777,
+    },
+    {
+      "channel_id": "UC3n5uGu18FoCy23ggWWp8tA",
+      "key": 28407,
+    },
+    {
+      "channel_id": "UCMwGHR0BTZuLsmjY_NT5Pwg",
+      "key": 27117,
+    },
+    {
+      "channel_id": "UCHsx4Hqa-1ORjQTh9TYDhww",
+      "key": 23219,
+    },
+    {
+      "channel_id": "UCDHABijvPBnJm7F-KlNME3w",
+      "key": 14390,
+    },
+    {
+      "channel_id": "UCt9H_RpQzhxzlyBxFqrdHqA",
+      "key": 13499,
+    },
+    {
+      "channel_id": "UCyl1z3jo3XHR1riLFKG5UAg",
+      "key": 12390,
+    },
+    {
+      "channel_id": "UCO_aKKYxn4tvrqPjcTzZ6EQ",
+      "key": 11559,
+    },
+  ],
+  "earliest_video": {
+    "earliest_view": "2025-01-01T07:05:23.752Z",
+    "video_id": "Cd4h3rWHJRg",
+  },
+  "total_channel_count": 48,
+  "total_unique_videos_viewed": 679,
+  "total_video_watch_time": 624066,
+  "total_view_count": 3139,
+  "video_views": [
+    {
+      "key": 89,
+      "video_id": "9ehwhQJ50gs",
+    },
+    {
+      "key": 79,
+      "video_id": "7b9DWZ1OxwI",
+    },
+    {
+      "key": 71,
+      "video_id": "WLMlYZdynxE",
+    },
+    {
+      "key": 57,
+      "video_id": "53rJX52p3G8",
+    },
+    {
+      "key": 55,
+      "video_id": "RWU3o_kDixc",
+    },
+    {
+      "key": 55,
+      "video_id": "8ZP5eqm4JqM",
+    },
+    {
+      "key": 52,
+      "video_id": "dle08Efv4WY",
+    },
+    {
+      "key": 48,
+      "video_id": "x_fkTc7Hlp0",
+    },
+    {
+      "key": 46,
+      "video_id": "cjsIkv4z4TM",
+    },
+    {
+      "key": 45,
+      "video_id": "50Ura_ZcSvY",
+    },
+    {
+      "key": 43,
+      "video_id": "XzkNg89Cq9Y",
+    },
+    {
+      "key": 38,
+      "video_id": "hcSuSzbj38M",
+    },
+    {
+      "key": 38,
+      "video_id": "8ZdLXELdF9Q",
+    },
+    {
+      "key": 37,
+      "video_id": "fUsUIWOwKEU",
+    },
+    {
+      "key": 35,
+      "video_id": "ql0cz-62ff0",
+    },
+  ],
+  "video_watch_time": [
+    {
+      "key": 23750,
+      "video_id": "w_WIIMlVIzw",
+    },
+    {
+      "key": 21624,
+      "video_id": "9ehwhQJ50gs",
+    },
+    {
+      "key": 18072,
+      "video_id": "7b9DWZ1OxwI",
+    },
+    {
+      "key": 11957,
+      "video_id": "RWU3o_kDixc",
+    },
+    {
+      "key": 11216,
+      "video_id": "WLMlYZdynxE",
+    },
+    {
+      "key": 10542,
+      "video_id": "53rJX52p3G8",
+    },
+    {
+      "key": 8983,
+      "video_id": "dle08Efv4WY",
+    },
+    {
+      "key": 8666,
+      "video_id": "ql0cz-62ff0",
+    },
+    {
+      "key": 8544,
+      "video_id": "a51VH9BYzZA",
+    },
+    {
+      "key": 7750,
+      "video_id": "XzkNg89Cq9Y",
+    },
+    {
+      "key": 7715,
+      "video_id": "xOs-q-QjD3U",
+    },
+    {
+      "key": 7655,
+      "video_id": "8ZP5eqm4JqM",
+    },
+    {
+      "key": 7333,
+      "video_id": "x_fkTc7Hlp0",
+    },
+    {
+      "key": 6614,
+      "video_id": "50Ura_ZcSvY",
+    },
+    {
+      "key": 6335,
+      "video_id": "RpuxAOGh2rg",
+    },
+  ],
+  "views_by_month": [
+    554,
+    521,
+    329,
+    233,
+    277,
+    340,
+    232,
+    245,
+    376,
+    32,
+    0,
+    0,
+  ],
+  "year": 2025,
+}
+`;
