@@ -1,7 +1,8 @@
-import { RewindDBEntry, fetchRecordFromCollectionById } from "@/lib/pocketbase/pocketbase"
+import { RewindDBEntry } from "@/lib/pocketbase/pocketbase"
 import { Metadata } from "next/types"
 import RewindComponentByID from "../(components)/RewindComponentByID/RewindComponentByID"
 import { notFound } from "next/navigation"
+import clientPocketbase from "@/lib/pocketbase/client/pocketbase_client"
 
 export interface PageProps {
     params: {
@@ -12,7 +13,7 @@ export interface PageProps {
 export async function generateMetadata(
     { params: {id} }: PageProps
 ): Promise<Metadata> {
-    const { rewind: { year } } = await fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
+    const { rewind: { year } } = await clientPocketbase.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
    
     return {
       openGraph: {

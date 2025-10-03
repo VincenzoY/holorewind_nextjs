@@ -1,6 +1,6 @@
 'use client'
 
-import { ChangeEvent, useRef } from "react";
+import { useRef } from "react";
 import Button from "@/components/GenericComponents/Button/Button";
 import { useLocalStorage } from "@/lib/hooks/useLocalStorage";
 import { useRouter } from "next/navigation";
@@ -15,19 +15,17 @@ import PrivacyPolicyDrawer from "@/components/RewindComponents/Drawers/PrivacyPo
 import { RewindDataOptions, getRewindData } from "@/lib/rewind/rewind";
 
 export default function Page() {
-  const [, setRewindId] = useLocalStorage<string>("rewindId")
-  const [, setRewindData] = useLocalStorage("rewindData")
+  const setRewindData = useSetRewindData()
   const router = useRouter()
 
   const fileUploadRef = useRef<HTMLInputElement>(null)
 
   const fileSuccessCallback = (rewindData: RewindDataType) => {
-    setRewindId(undefined)
     setRewindData(rewindData)
     router.push("/rewind")
   }
 
-  const options: RewindDataOptions = { year: 2024, includedData: 'all' }
+  const options: RewindDataOptions = { year: 2024 }
 
   return (
     <div className="w-full flex items-center justify-center h-dvh relative">
@@ -65,6 +63,18 @@ export default function Page() {
       </div>
     </div>
   )
+}
+
+const useSetRewindData = () => {
+  const [, setRewindId] = useLocalStorage<string>("rewindId")
+  const [, setRewindData] = useLocalStorage("rewindData")
+
+  const setRewindFunction = (rewindData: RewindDataType) => {
+    setRewindId(undefined)
+    setRewindData(rewindData)
+  }
+
+  return setRewindFunction
 }
 
 const handleFileChange = async (

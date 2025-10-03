@@ -1,4 +1,5 @@
 import { getPeriodFromYear } from "../../utils/utils"
+import { getRewindFilterFunction, RewindFilterDataType } from "../filterRewind/filterRewind"
 import { RewindDataOptions } from "../rewind"
 
 export interface WatchHistoryEntry {
@@ -23,8 +24,15 @@ export interface FormattedWatchHistoryEntry {
     channelId?: string
 }
 
-export function formatWatchHistory(watchHistory: string, options: RewindDataOptions) {
-    const { year, includedData } = options
+const DEFAULT_REWIND_FILTER: RewindFilterDataType = {
+  includedData: "all",
+  channelIds: ["UCZLZ8Jjx_RN2CXloOmgTHVg"]
+}
+
+export async function formatWatchHistory(watchHistory: string, options: RewindDataOptions) {
+    const { year, filter = DEFAULT_REWIND_FILTER } = options
+
+    const allowRewindEntryFunction = await getRewindFilterFunction(filter)
 
     const [startTime, endTime] = getPeriodFromYear(year)
 
@@ -48,17 +56,16 @@ export function formatWatchHistory(watchHistory: string, options: RewindDataOpti
         const time = watch_record["time"];
         
         if (!videoMatch || !time) { return; }
-
-        const header = watch_record.header
-        const shouldNotIncludeData = (includedData == "music" && header == "YouTube") || (includedData == "video" && header == "YouTube Music")
-        if (shouldNotIncludeData) { return; }
         
         if((startTimeDate && Date.parse(time) < startTimeDate) || (endTimeDate && Date.parse(time) > endTimeDate)) { return; }
 
+        const type = watch_record.header
         const videoId = videoMatch[3]
-        const channelLink = watch_record["subtitles"]?.[0]?.["name"]
+        const channelLink = watch_record["subtitles"]?.[0]?.["url"]
         const channelMatch = channelLink?.match(channelRegex) || undefined
         const channelId = channelMatch && channelMatch[1]
+
+        if (!allowRewindEntryFunction(channelId, type)) return
 
         filteredData[videoId] ||= {
             watchHistory: [],

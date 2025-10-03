@@ -48,11 +48,11 @@ exports[`getRewindData > should generate rewind data from watch history file 1`]
       "key": 26,
     },
     {
-      "channel_id": "UCvN5h1ShZtc7nly3pezRayg",
+      "channel_id": "UCoSrY_IQQVpmIRZ9Xf-y93g",
       "key": 21,
     },
     {
-      "channel_id": "UCoSrY_IQQVpmIRZ9Xf-y93g",
+      "channel_id": "UCvN5h1ShZtc7nly3pezRayg",
       "key": 21,
     },
     {
@@ -118,11 +118,11 @@ exports[`getRewindData > should generate rewind data from watch history file 1`]
       "key": 71,
     },
     {
-      "channel_id": "UCDHABijvPBnJm7F-KlNME3w",
+      "channel_id": "UCO_aKKYxn4tvrqPjcTzZ6EQ",
       "key": 66,
     },
     {
-      "channel_id": "UCO_aKKYxn4tvrqPjcTzZ6EQ",
+      "channel_id": "UCDHABijvPBnJm7F-KlNME3w",
       "key": 66,
     },
   ],

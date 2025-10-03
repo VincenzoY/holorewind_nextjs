@@ -1,5 +1,4 @@
 import { Channel } from "@/lib/pocketbase/pocketbase"
-import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils"
 import { RewindDataType } from "@/lib/rewind/rewindData/rewindData"
 
 interface RewindOpenGraphStyleImageProps {

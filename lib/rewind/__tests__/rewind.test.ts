@@ -17,8 +17,7 @@ describe('getRewindData', () => {
     const mockFileList = [mockFile] as unknown as FileList
 
     const options: RewindDataOptions = {
-      year: 2025,
-      includedData: "all"
+      year: 2025
     }
 
     const result = await getRewindData(mockFileList, options)
@@ -35,7 +34,6 @@ describe('getRewindData', () => {
     const emptyFileList = [] as unknown as FileList
     const options: RewindDataOptions = {
       year: 2025,
-      includedData: "all"
     }
 
     await expect(getRewindData(emptyFileList, options)).rejects.toThrow('No file found.')
