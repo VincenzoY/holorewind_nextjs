@@ -3,7 +3,8 @@ import RewindOpenGraphStyleImage from '../(components)/RewindOpenGraphImage/Rewi
 import { RewindDBEntry } from '@/lib/pocketbase/pocketbase'
 import { PageProps } from './page'
 import { notFound } from 'next/navigation'
-import ClientPocketbase, { fetchChannelByChannelIds } from '@/lib/pocketbase/client/pocketbase_client'
+import pb from '@/lib/pocketbase/pocketbase'
+import { fetchChannelByChannelIds } from '@/lib/pocketbase/utils'
  
 export const runtime = 'edge'
 
@@ -20,7 +21,7 @@ export const contentType = 'image/png'
 export default async function Image(
   { params: {id} }: PageProps
 ) {
-  const { rewind } = await ClientPocketbase.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
+  const { rewind } = await pb.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
   const dataPerChannel: Array<{key: number, channel_id: string}> = rewind.channel_unique_views ?? rewind.channel_watch_time
   const channels = await fetchChannelByChannelIds(dataPerChannel.map(item => item.channel_id))
 
