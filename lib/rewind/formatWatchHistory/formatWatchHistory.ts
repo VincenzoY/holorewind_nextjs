@@ -1,5 +1,5 @@
 import { getPeriodFromYear } from "../../utils/utils"
-import { getRewindFilterFunction, RewindFilterDataType } from "../filterRewind/filterRewind"
+import { getTypeFilterFunction } from "../filterWatchHistory/filterWatchHistory"
 import { RewindDataOptions } from "../rewind"
 
 export interface WatchHistoryEntry {
@@ -21,20 +21,14 @@ export interface FormattedWatchHistory {
 
 export interface FormattedWatchHistoryEntry {
     watchHistory: Array<[string, string]>
-    channelId?: string
-}
-
-const DEFAULT_REWIND_FILTER: RewindFilterDataType = {
-  includedData: "all",
-  channelIds: ["UCZLZ8Jjx_RN2CXloOmgTHVg"]
 }
 
 export async function formatWatchHistory(watchHistory: string, options: RewindDataOptions) {
-    const { year, filter = DEFAULT_REWIND_FILTER } = options
-
-    const allowRewindEntryFunction = await getRewindFilterFunction(filter)
+    const { year, filter } = options
 
     const [startTime, endTime] = getPeriodFromYear(year)
+
+    const typeFilterFunction = await getTypeFilterFunction(filter)
 
     let watchHistoryJSON: Array<WatchHistoryEntry> = []
     try {
@@ -45,7 +39,6 @@ export async function formatWatchHistory(watchHistory: string, options: RewindDa
 	}
 
     const videoRegex = /https:\/\/(www|music).youtube.com\/watch\?v(=|\\u003d)(.+)/
-    const channelRegex = /https:\/\/www.youtube.com\/channel\/(.+)/
     const filteredData: FormattedWatchHistory= {}
 
     const startTimeDate = startTime && Date.parse(startTime)
@@ -61,21 +54,14 @@ export async function formatWatchHistory(watchHistory: string, options: RewindDa
 
         const type = watch_record.header
         const videoId = videoMatch[3]
-        const channelLink = watch_record["subtitles"]?.[0]?.["url"]
-        const channelMatch = channelLink?.match(channelRegex) || undefined
-        const channelId = channelMatch && channelMatch[1]
 
-        if (!allowRewindEntryFunction(channelId, type)) return
+        if (!typeFilterFunction(type)) return
 
-        filteredData[videoId] ||= {
-            watchHistory: [],
-            channelId: channelId
-        }
+        filteredData[videoId] ||= { watchHistory: [] }
 
         const approxEndWatchTime = watchHistoryJSON[index - 1]?.["time"] || new Date(Date.now()).toISOString()
 
         filteredData[videoId]["watchHistory"].push([time, approxEndWatchTime])
-        filteredData[videoId]["channelId"] ||= channelId
     })
     
     return filteredData
