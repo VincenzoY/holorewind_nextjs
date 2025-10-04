@@ -1,19 +1,15 @@
-import { DecoratedChannelData, DecoratedVideoData } from "@/lib/rewind/fetchRecords/fetchRecords"
+import { DecoratedChannelData, DecoratedVideoData, WatchHistoryWithDataType } from "@/lib/rewind/fetchRecords/fetchRecords"
 import { type HeapInfo, type AccumulatorInfo, nLargestObjects, reduce } from "./utils"
 import { RewindDataOptions } from "../rewind"
 
 export type RewindDataType = Record<string, any>
-interface GenerateRewindParamsType {
-    videoData: Record<string, DecoratedVideoData>
-    channelData: Record<string, DecoratedChannelData>
-}
 
 export interface RewindDataItem {
     key: any
     [data: string]: any
 }
 
-export async function generateRewind({videoData, channelData}: GenerateRewindParamsType, options: RewindDataOptions): Promise<RewindDataType> {
+export async function generateRewind({videoData, channelData}: WatchHistoryWithDataType, options: RewindDataOptions): Promise<RewindDataType> {
     const { year } = options
 
     const videoFilters: Record<string, HeapInfo<DecoratedVideoData>> = {

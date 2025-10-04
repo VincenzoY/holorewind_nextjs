@@ -23,7 +23,12 @@ export interface DecoratedChannelData {
     watchHistory: ChannelWatchHistory
 }
 
-export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory) {
+export interface WatchHistoryWithDataType {
+    videoData: Record<string, DecoratedVideoData>
+    channelData: Record<string, DecoratedChannelData> 
+}
+
+export async function fetchRecords(formattedWatchHistory: FormattedWatchHistory): Promise<WatchHistoryWithDataType> {
     const videoIds = Object.keys(formattedWatchHistory)
     const tempChannelWatchData: Record<string, ChannelWatchHistory> = {}
     const decoratedVideoData: Record<string, DecoratedVideoData> = {}

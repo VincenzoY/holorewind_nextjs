@@ -1,7 +1,7 @@
 import PocketBase, { ListResult } from 'pocketbase';
 import { RecordService } from 'pocketbase'
 import { RewindDataType } from '@/lib/rewind/rewindData/rewindData';
-import { RewindFilterDataType } from '@/lib/rewind/filterRewind/filterRewind';
+import { RewindFilterDataType } from '@/lib/rewind/filterWatchHistory/filterWatchHistory';
 import { isOnServer } from '../utils/utils';
 import { loginAsAdmin } from './server/login';
 
