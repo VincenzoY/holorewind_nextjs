@@ -25,7 +25,7 @@ export default function Page() {
     router.push("/rewind")
   }
 
-  const options: RewindDataOptions = { year: 2025 }
+  const options: RewindDataOptions = { year: 2024 }
 
   return (
     <div className="w-full flex items-center justify-center h-dvh relative">
