@@ -17,8 +17,8 @@ export async function generateMetadata(
    
     return {
       openGraph: {
-        title: `My ${year + " " || ""}HoloLive Rewind`,
-        description: "This is who I was watching this year. Find yours too!",
+        title: `My ${year + " " || ""}HoloRewind`,
+        description: "This is the VTubers I was watching this year. Find yours too!",
       },
     }
 }

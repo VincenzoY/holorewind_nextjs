@@ -38,7 +38,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
         const rewindUrl = await createRewindUrl()
 
         const twitterUrl = new URL("https://twitter.com/intent/tweet")
-        twitterUrl.searchParams.append('text', 'This is who I was watching in Hololive this year. Find yours too!')
+        twitterUrl.searchParams.append('text', 'This is the VTubers I was watching this year. Find yours too!')
         twitterUrl.searchParams.append('hashtags', 'HoloRewind');
         twitterUrl.searchParams.append('url', rewindUrl);
 

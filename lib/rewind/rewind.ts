@@ -9,10 +9,7 @@ export interface RewindDataOptions {
   filter?: RewindFilterType
 }
 
-export async function getRewindData(files: FileList, options: RewindDataOptions): Promise<RewindDataType> {
-  if (files.length == 0) { throw new Error(`No file found.`); }
-
-  const file = files[0]
+export async function createRewind(file: File, options: RewindDataOptions): Promise<RewindDataType> {
   const watchHistory = await file.text()
 
   const { filter } = options
