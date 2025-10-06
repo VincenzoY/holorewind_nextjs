@@ -2,11 +2,11 @@ import { RewindDataType, generateRewind } from "./rewindData/rewindData";
 import { formatWatchHistory } from "./formatWatchHistory/formatWatchHistory";
 import { fetchRecords } from "./fetchRecords/fetchRecords";
 import { createRewindCreationStat } from "@/lib/pocketbase/utils";
-import { filterWatchHistory, RewindFilterType } from "./filterWatchHistory/filterWatchHistory";
+import { filterWatchHistory, RewindFilterID } from "./filterWatchHistory/filterWatchHistory";
 
 export interface RewindDataOptions {
   year: number
-  filter?: RewindFilterType
+  filter?: RewindFilterID
 }
 
 export async function createRewind(file: File, options: RewindDataOptions): Promise<RewindDataType> {

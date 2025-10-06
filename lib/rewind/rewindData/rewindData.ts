@@ -104,5 +104,6 @@ export async function generateRewind({videoData, channelData}: WatchHistoryWithD
         ...specificChannelData,
         ...accumulatedVideoData,
         ...accumulatedChannelData,
+        filter: options.filter
     }
 }

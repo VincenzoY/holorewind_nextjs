@@ -12,8 +12,7 @@ import Link from "next/link";
 import MainLogo from "@/components/Icons/MainLogo/MainLogo";
 import TextLink from "@/components/GenericComponents/Link/Link"
 import PrivacyPolicyDrawer from "@/components/RewindComponents/Drawers/PrivacyPolicyDrawer/PrivacyPolicyDrawer";
-import { RewindDataOptions } from "@/lib/rewind/rewind";
-import { rewindPostRequest } from "@/lib/rewind/rewindPostRequest/rewindPostRequest";
+import { createRewind, RewindDataOptions } from "@/lib/rewind/rewind";
 
 export default function Page() {
   const setRewindData = useSetRewindData()
@@ -83,25 +82,16 @@ const handleFileChange = async (
   options: RewindDataOptions,
   successCallback: (rewindData: RewindDataType) => void
 ) => {
-  if (!files) return
+  if (!files || !files[0]) return
 
-  const rewindPostRequestPromise: Promise<RewindDataType>
-    = new Promise(async (resolve, reject) => {
-    const response = await rewindPostRequest(files[0], options)
-
-    if (response.ok) {
-      resolve(await response.json())
-    } else {
-      reject("There was an error while creating your Rewind.")
-    }
-  })
+  const watchHistoryFile = files[0]
 
   const rewindData = await toast.promise(
-    rewindPostRequestPromise,
+    createRewind(watchHistoryFile, options),
     {
       pending: { render() { return "Loading..." } },
       success: { render() { return "Success!" } },
-      error: { render() { return "There was an error while creating your Rewind." } }
+      error: { render({data}: {data: Error}) { return data.message }}
     }
   )
 

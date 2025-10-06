@@ -9,24 +9,18 @@ export interface RewindFilterDataType {
   orgs: string[]
 }
 
-export type ExistingRewindFilterID = string
+export type RewindFilterID = string
 
-export type RewindFilterType = ExistingRewindFilterID | RewindFilterDataType
+const DEFAULT_REWIND_FILTER: RewindFilterID = "ndhdtwy00bp44b9"
 
-const DEFAULT_REWIND_FILTER: RewindFilterType = "ndhdtwy00bp44b9"
-
-const isExistingRewindFilter = (filter: RewindFilterType): filter is ExistingRewindFilterID => {
-  return typeof(filter) === "string"
-}
-
-const getFilterDataFromExistingFilter = async (filterId: ExistingRewindFilterID) => {
+const getFilterDataFromExistingFilter = async (filterId: RewindFilterID) => {
   const filterRecord = await pb.fetchRecordFromCollectionById<FiltersDBEntry>("filters", filterId)
 
   return filterRecord.filter_data
 }
 
-export const getTypeFilterFunction = async (filter: RewindFilterType = DEFAULT_REWIND_FILTER) => {
-  const rewindFilterData = isExistingRewindFilter(filter) ? await getFilterDataFromExistingFilter(filter) : filter;
+export const getTypeFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
+  const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
   const { includedData } = rewindFilterData
 
@@ -40,8 +34,8 @@ export const getTypeFilterFunction = async (filter: RewindFilterType = DEFAULT_R
   return typeFilterFunction
 }
 
-const getChannelFilterFunction = async (filter: RewindFilterType = DEFAULT_REWIND_FILTER) => {
-  const rewindFilterData = isExistingRewindFilter(filter) ? await getFilterDataFromExistingFilter(filter) : filter;
+const getChannelFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
+  const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
   const { channelIds, orgs } = rewindFilterData
 
@@ -55,7 +49,7 @@ const getChannelFilterFunction = async (filter: RewindFilterType = DEFAULT_REWIN
   return channelFilterFunction
 }
 
-export const filterWatchHistory = async (watchHistory: WatchHistoryWithDataType, filter?: RewindFilterType) => {
+export const filterWatchHistory = async (watchHistory: WatchHistoryWithDataType, filter?: RewindFilterID) => {
   const { videoData, channelData } = watchHistory
 
   const channelFilterFunction = await getChannelFilterFunction(filter)
