@@ -58,7 +58,7 @@ export default function Page() {
               </div>
           </div>
       </div>
-      <div className="absolute bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
+      <div className="fixed bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
         By using this site you agree to our <TextLink href="#" onClick={() => NiceModal.show(PrivacyPolicyDrawer)}>Privacy Policy</TextLink>
       </div>
     </div>
