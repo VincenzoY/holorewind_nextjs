@@ -42,6 +42,11 @@ const NavDrawer: React.FC<NavDrawerProps> = () => {
                         </div>
                     </Link>
                 )}
+                <Link href="/create-rewind" onClick={modal.hide}>
+                    <div className="border-solid border-b-2 border-b-page-white p-4">
+                        Create Rewind
+                    </div>
+                </Link>
                 <div className="border-solid border-b-2 border-b-page-white p-4 cursor-pointer" onClick={() => NiceModal.show(HelpDrawer)}>
                     Help
                 </div>
