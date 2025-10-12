@@ -17,7 +17,7 @@ interface ShareComponentProps {
 
 export default function ShareComponent({ rewindId: rewindIdParam }: ShareComponentProps) {
     const rewindData = useContext(RewindContext) as RewindDataType
-    const { total_unique_videos_viewed: uniqueViews, total_channel_count: channelCount } = rewindData
+    const { total_unique_videos_viewed: uniqueViews, total_channel_count: channelCount, filter } = rewindData
     // initial launch didn't include viewsPerChannel so must keep watchTimePerChannel for back compat
     const { channel_watch_time: watchTimePerChannel, channel_unique_views: uniqueViewsPerChannel} = rewindData
     const dataPerChannel: Array<{ key: number, channel_id: string }> = uniqueViewsPerChannel ?? watchTimePerChannel
@@ -91,6 +91,13 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                             >
                                 <TwitterLogo width={24} height={24}/> Share on Twitter
                             </ShareButton>
+                            {filter &&
+                                <ShareButton 
+                                    onClick={async () => await copyToClipboard(await createFilteredRewindUrl(filter))}
+                                >
+                                    <LinkIcon width={24} height={24}/> Share your Filter
+                                </ShareButton>
+                            }
                             <ShareButton 
                                 onClick={followOnTwitter}
                             >
@@ -169,5 +176,13 @@ function getRewindUrl(rewindId: string) {
         process.env.NODE_ENV === "production" ? 
         `https://${window.location.host}/rewind/${rewindId}` :
         `http://${window.location.host}/rewind/${rewindId}`
+    )
+}
+
+const createFilteredRewindUrl = (filterId: string) => {
+    return (
+        process.env.NODE_ENV === "production" ? 
+        `https://${window.location.host}/create-rewind?filter=${filterId}` :
+        `http://${window.location.host}/create-rewind?filter=${filterId}`
     )
 }

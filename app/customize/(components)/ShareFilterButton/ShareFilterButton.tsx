@@ -14,8 +14,12 @@ export default function ShareFilterButton({ saveFilter }: ShareFilterButtonProps
   }
 
   const copyFilterLink = async () => {
-    const filterUrl = await createFilterUrl()
-    await copyToClipboard(filterUrl)
+    try {
+      const filterUrl = await createFilterUrl()
+      await copyToClipboard(filterUrl)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (

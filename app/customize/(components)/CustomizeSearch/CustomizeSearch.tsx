@@ -1,8 +1,6 @@
 'use client'
 
-import NiceModal from "@ebay/nice-modal-react"
-import TextLink from "@/components/GenericComponents/Link/Link"
-import PrivacyPolicyDrawer from "@/components/RewindComponents/Drawers/PrivacyPolicyDrawer/PrivacyPolicyDrawer"
+import { PrivacyPolicyFooter } from "@/components/RewindComponents/Drawers/PrivacyPolicyDrawer/PrivacyPolicyDrawer"
 import { useVTuberSearchParams } from "../../(hooks)/useVTuberSearchParams"
 import { useFilterData } from "../../(hooks)/useFilterData"
 import SelectedVTubers from "../SelectedVTubers/SelectedVTubers"
@@ -10,6 +8,7 @@ import SearchFields from "../SearchFields/SearchFields"
 import SearchResults from "../SearchResults/SearchResults"
 import CollapsibleSection from "../CollapsibleSection/CollapsibleSection"
 import ShareFilterButton from "../ShareFilterButton/ShareFilterButton"
+import CreateRewindButton from "../CreateRewindButton/CreateRewindButton"
 import { useQueryClient } from "@tanstack/react-query"
 import { Channel, FiltersDBEntry } from "@/lib/pocketbase/pocketbase"
 
@@ -72,15 +71,15 @@ export default function CustomizeSearch({ filter }: CustomizeSearchProps) {
           <CollapsibleSection title={`Video Types`}>
             <div className="flex gap-2 md:gap-4 flex-col md:flex-row">
               <div className="flex gap-2">
-                <input type="checkbox" id="all" checked={includedData === "all"} onClick={() => setIncludedData("all")} />
+                <input type="checkbox" id="all" checked={includedData === "all"} onChange={() => setIncludedData("all")} />
                 <label htmlFor="all" className="text-page-white text-md font-bold">YouTube Videos + Music</label>
               </div>
               <div className="flex gap-2">
-                <input type="checkbox" id="video" checked={includedData === "video"} onClick={() => setIncludedData("video")} />
+                <input type="checkbox" id="video" checked={includedData === "video"} onChange={() => setIncludedData("video")} />
                 <label htmlFor="video" className="text-page-white text-md font-bold">Only YouTube Videos</label>
               </div>
               <div className="flex gap-2">
-                <input type="checkbox" id="music" checked={includedData === "music"} onClick={() => setIncludedData("music")} />
+                <input type="checkbox" id="music" checked={includedData === "music"} onChange={() => setIncludedData("music")} />
                 <label htmlFor="music" className="text-page-white text-md font-bold">Only YouTube Music</label>
               </div>
             </div>
@@ -94,12 +93,13 @@ export default function CustomizeSearch({ filter }: CustomizeSearchProps) {
               <SelectedVTubers selectedChannelIds={selectedChannelIds} toggleVTuberSelection={toggleVTuberSelection} clearVTubers={clearVTubers} />
             </div>
           </CollapsibleSection>
-          <ShareFilterButton saveFilter={saveFilter} />
+          <div className="flex flex-col gap-4">
+            <CreateRewindButton saveFilter={saveFilter} />
+            <ShareFilterButton saveFilter={saveFilter} />
+          </div>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
-        By using this site you agree to our <TextLink onClick={() => NiceModal.show(PrivacyPolicyDrawer)}>Privacy Policy</TextLink>
-      </div>
+      <PrivacyPolicyFooter />
     </>
   )
 }

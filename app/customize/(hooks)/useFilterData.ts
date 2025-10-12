@@ -1,6 +1,7 @@
-import pb, { FiltersDBEntry } from "@/lib/pocketbase/pocketbase"
+import { FiltersDBEntry } from "@/lib/pocketbase/pocketbase"
 import { RewindFilterDataType } from "@/lib/rewind/filterWatchHistory/filterWatchHistory"
 import { useState } from "react"
+import { toast } from "react-toastify"
 
 interface UseFilterDataReturn {
   selectedChannelIds: Array<string>,
@@ -43,15 +44,29 @@ export const useFilterData = (initialFilter: FiltersDBEntry | null): UseFilterDa
   const saveFilter = async () => {
     if (filterId) return filterId
 
-    const filterRecord = await pb.createRecordInCollection<FiltersDBEntry>("filters", {
-      filter_data: {
-        includedData,
-        orgs: [],
+    const response = await fetch('/api/filters', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         channelIds,
-      }
+        includedData,
+      }),
     })
 
-    return filterRecord.id
+    if (!response.ok) {
+      const data = await response.json()
+      const errorMessage = data.error || 'Failed to save filter'
+      toast.error(errorMessage)
+      throw new Error(errorMessage)
+    }
+
+    const data = await response.json()
+    setFilterId(data.id)
+    toast.success('Filter saved successfully')
+
+    return data.id
   }
 
   return {

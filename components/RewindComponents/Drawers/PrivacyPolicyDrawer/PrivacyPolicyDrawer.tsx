@@ -2,10 +2,7 @@ import LeftDrawer from "@/components/GenericComponents/LeftDrawer/LeftDrawer"
 import Link from "@/components/GenericComponents/Link/Link"
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
 
-interface PrivacyPolicyDrawerProps {
-}
-
-const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
+const PrivacyPolicyDrawer = NiceModal.create(() => {
     const modal = useModal()
 
     return (
@@ -87,7 +84,14 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
         </div>
       </LeftDrawer>
     )
+})
+
+export default PrivacyPolicyDrawer
+
+export function PrivacyPolicyFooter() {
+  return (
+    <div className="fixed bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
+      By using this site you agree to our <Link onClick={() => NiceModal.show(PrivacyPolicyDrawer)}>Privacy Policy</Link>
+    </div>
+  )
 }
-
-
-export default NiceModal.create(PrivacyPolicyDrawer)

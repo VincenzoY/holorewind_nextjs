@@ -10,3 +10,16 @@ export const getPeriodFromYear = (year: number) => {
         new Date(year, 11, 31, 23, 59, 59).toISOString()
     ]
 }
+
+export const getCurrentRewindYear = () => {
+    const now = new Date()
+    const currentMonth = now.getMonth() // 0-indexed (0 = January)
+
+    // If current month is before November (month 10), use previous year
+    // Otherwise use current year
+    if (currentMonth < 9) {
+        return now.getFullYear() - 1
+    }
+
+    return now.getFullYear()
+}
