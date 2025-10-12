@@ -7,6 +7,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 const queryClient = new QueryClient();
 
 export default function QueryClientContextProvider({ children }: { children: ReactNode }) {
+  queryClient.setDefaultOptions({
+    queries: {
+      staleTime: 60 * 1000,
+    },
+  })
+
   return (
     <QueryClientProvider client={queryClient}>
       {children}

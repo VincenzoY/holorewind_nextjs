@@ -12,6 +12,7 @@ const TextInput: React.FC<TextInputProps> = ({className, ...props}) => {
                 text-lg font-semibold text-gray-900
                 ${className}
             `}
+            size={64}
         />
     )
 }

@@ -1,25 +1,18 @@
 import Shimmer from "@/components/GenericComponents/Shimmer/Shimmer"
 import { Channel } from "@/lib/pocketbase/pocketbase"
 import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils"
-import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 interface VTuberBadgeProps {
-    channelId: string
+    channel?: Channel
     selected?: boolean
+    onClick?: (channel?: Channel) => void
 }
 
-const VTuberBadge: React.FC<VTuberBadgeProps> = ({channelId}) => {
-    const { data: channel } = useQuery({
-        queryKey: ['fetchChannel', channelId],
-        queryFn: async () => (await fetchChannelByChannelIds([channelId]))[channelId],
-    })
-
-    const [selected, setSelected] = useState(false)
-
+const VTuberBadge: React.FC<VTuberBadgeProps> = ({channel, selected, onClick}) => {
     const selectedClassNames = selected ? 
         "border-ame-gold bg-opacity-80" : 
-        "border-slate-100 bg-opacity-40"
+        "border-gray-500 bg-opacity-40"
 
     return (
         <div 
@@ -33,10 +26,13 @@ const VTuberBadge: React.FC<VTuberBadgeProps> = ({channelId}) => {
                 transition-all duration-300
                 p-2 rounded-lg
             `}
-            onClick={() => setSelected(!selected)}
+            onClick={() => onClick?.(channel)}
         >
             <ChannelImage channel={channel}/>
-            <ChannelName channel={channel}/>
+            <div className="w-40">
+                <ChannelName channel={channel}/>
+            </div>
+           
         </div>
     )
 }
@@ -49,23 +45,25 @@ const ChannelImage = ({ channel }: {channel?: Channel}) => {
     }
 
     return (
-        <img src={channel.photo} className={`${sharedClassNames} line-clamp-1`} alt={`Photo for ${channel?.name}`}/>
+        <img src={`https://holodex.net/statics/channelImg/${channel.channel_id}/50.png`} className={`${sharedClassNames} line-clamp-1`} alt={`Photo for ${channel?.name}`}/>
     )
 }
 
 const ChannelName = ({ channel }: {channel?: Channel}) => {
+    if(!channel) return <ShimmerText />
+
     return (
-        <div className="w-40">
-            {channel ? 
-            <h3 className="text-md font-bold">{channel.name}</h3> :
-            <ShimmerText />}
+        <div className="flex flex-col">
+            <h3 className="text-md font-bold line-clamp-1">{channel.name}</h3>
+            <p className="text-xs font-bold line-clamp-1">{channel.org}</p>
+            <p className="text-xs font-bold line-clamp-1">{channel.group}</p>
         </div>
     )
 }
 
 const ShimmerText = () => {
     return (
-        <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-col gap-2">
             <div className="h-4 w-full"><Shimmer /></div>
             <div className="h-4 w-[60%]"><Shimmer /></div>
         </div>
