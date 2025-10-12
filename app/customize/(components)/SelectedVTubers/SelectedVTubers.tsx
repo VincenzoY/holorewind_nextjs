@@ -34,7 +34,7 @@ export default function SelectedVTubers({ selectedChannelIds, toggleVTuberSelect
       </div>
 
       {selectedChannelIds.length === 0 ? (
-        <p className="text-page-white text-center text-lg opacity-50">there's nothing here yet...</p>
+        <p className="text-page-white text-center text-lg opacity-50">there&apos;s nothing here yet...</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
           {selectedChannelIds.map((channelId) => {
