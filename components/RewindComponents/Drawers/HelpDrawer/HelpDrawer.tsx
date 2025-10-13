@@ -33,14 +33,14 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                     <p className="text-md">
                         YouTube does not provide watch time and only provides the time you click on a video so watch time is 
                         an approximated attribute. To approximate for watch time, I assume you either watch the whole video or 
-                        the duration until you click on a different youtube video. (This could be harmful however if you always
-                        play a seperate video in the background as I cannot determine it as a secondary video and I assume you switch
+                        the duration until you click on a different youtube video. (This could be error prone however if you always
+                        play a separate video in the background as I cannot determine it as a secondary video and I assume you switch
                         to watching the new video).
                         There&apos;s some extra stuff I calculate to try to be more accurate but that&apos;s the general idea
                         (It should hopefully be a good enough approximation).
                     </p>
                     <p className="text-md">
-                        In essense, watch time is the most accurate for a person whom, when they click on a video, watches it in its
+                        TLDR: watch time is the most accurate for a person who, when they click on a video, watches it in its
                         entirety without clicking on any other videos in between. There is also a small randomness portion on how
                         accurate the data from YouTube is. The less similar you are to this person, the less accurate your watch time data will be.
                     </p>
