@@ -55,7 +55,7 @@ const LeftDrawer: React.FC<LeftDrawerProps> = ({
                                 </IconButton>
                             </div>
                         </div>
-                        <div className='h-[calc(100vh-4rem)]'>
+                        <div className='h-[calc(100%-4rem)]'>
                             {children}
                         </div>
                     </div>
