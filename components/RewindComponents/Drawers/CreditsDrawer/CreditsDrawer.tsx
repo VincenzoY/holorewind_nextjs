@@ -41,13 +41,29 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
                         </Link>.
                         (You should go follow me :D) 
                     </p>
+                    <hr className="border-ame-gold border-1"/>
+                    <p className="text-md">
+                        Thanks to everyone who checked this out last year and this year. It was cool to build something
+                        that people used and shared! I hope you guys liked it too. It was also important to me that I expanded
+                        to more VTubers so you (and I) could share/celebrate wider communities than just Hololive. 
+                        <br /><br />
+                        Of course, I also have to mention the graduations of Fauna, Mumei and Gura. I had many feelings from their
+                        graduations but mostly it's respect that they have made a decision that they think is best. My greatest well
+                        wishes to Mumei who seems to be departing on the most different path.
+                        <br /><br />
+                        - 2025 
+                    </p>
+                    <hr className="border-ame-gold border-1"/>
                     <p className="text-md">
                         I also wanted to leave a thanks to Amelia Watson. I actually was planning to 
                         do this project last year but lost motivation for it. Ame&apos;s graduation made me
                         reminisce on all the cool stuff she did over the last 4 years. Her passion pushed 
                         me to actually finish this. Also thanks to my oshi Kronii (which funnily enough is
                         on theme with the time/rewind stuff).
+                        <br /><br />
+                        - 2024 
                     </p>
+                    <hr className="border-ame-gold border-1"/>
                 </div>
             </div>
         </LeftDrawer>
