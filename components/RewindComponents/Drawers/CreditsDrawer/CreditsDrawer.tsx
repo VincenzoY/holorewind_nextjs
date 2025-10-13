@@ -48,7 +48,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
                         to more VTubers so you (and I) could share/celebrate wider communities than just Hololive. 
                         <br /><br />
                         Of course, I also have to mention the graduations of Fauna, Mumei and Gura. I had many feelings from their
-                        graduations but mostly it's respect that they have made a decision that they think is best. My greatest well
+                        graduations but mostly it&apos;s respect that they have made a decision that they think is best. My greatest well
                         wishes to Mumei who seems to be departing on the most different path.
                         <br /><br />
                         - 2025 
