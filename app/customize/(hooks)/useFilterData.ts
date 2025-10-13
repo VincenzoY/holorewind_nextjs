@@ -5,11 +5,11 @@ import { toast } from "react-toastify"
 
 interface UseFilterDataReturn {
   selectedChannelIds: Array<string>,
-  includedData: RewindFilterDataType["includedData"],
+  includedData: RewindFilterDataType["included_data"],
   addVTuber: (channelID: string | string[]) => void,
   removeVTuber: (channelID: string | string[]) => void,
   clearVTubers: () => void,
-  setIncludedData: (includedData: RewindFilterDataType["includedData"]) => void,
+  setIncludedData: (includedData: RewindFilterDataType["included_data"]) => void,
   saveFilter: () => Promise<string>
 }
 
@@ -17,8 +17,8 @@ export const useFilterData = (initialFilter: FiltersDBEntry | null): UseFilterDa
 
   const initialFilterData = initialFilter?.filter_data
 
-  const [includedData, setIncludedDataState] = useState<RewindFilterDataType["includedData"]>(initialFilterData?.includedData || "all")
-  const [channelIds, setChannelIds] = useState<RewindFilterDataType["channelIds"]>(initialFilterData?.channelIds || [])
+  const [includedData, setIncludedDataState] = useState<RewindFilterDataType["included_data"]>(initialFilterData?.included_data || "all")
+  const [channelIds, setChannelIds] = useState<RewindFilterDataType["channel_ids"]>(initialFilterData?.channel_ids || [])
   const [filterId, setFilterId] = useState(initialFilter?.id)
 
   const addVTuber = (channelID: string | string[]) => {

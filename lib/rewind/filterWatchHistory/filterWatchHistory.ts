@@ -4,8 +4,8 @@ import { WatchHistoryWithDataType } from "../fetchRecords/fetchRecords"
 import { WatchHistoryEntry } from "../formatWatchHistory/formatWatchHistory"
 
 export interface RewindFilterDataType {
-  includedData: "all" | "music" | "video"
-  channelIds: string[]
+  included_data: "all" | "music" | "video"
+  channel_ids: string[]
   orgs: string[]
 }
 
@@ -22,12 +22,12 @@ const getFilterDataFromExistingFilter = async (filterId: RewindFilterID) => {
 export const getTypeFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
   const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
-  const { includedData } = rewindFilterData
+  const { included_data } = rewindFilterData
 
   const typeFilterFunction = (type: WatchHistoryEntry["header"]) => {
     return !(
-      (includedData === "music" && type === "YouTube") || 
-      (includedData === "video" && type === "YouTube Music")
+      (included_data === "music" && type === "YouTube") || 
+      (included_data === "video" && type === "YouTube Music")
     )
   }
 
@@ -37,9 +37,9 @@ export const getTypeFilterFunction = async (filter: RewindFilterID = DEFAULT_REW
 const getChannelFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
   const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
-  const { channelIds, orgs } = rewindFilterData
+  const { channel_ids, orgs } = rewindFilterData
 
-  const allowedChannelIdsSet = new Set(channelIds)
+  const allowedChannelIdsSet = new Set(channel_ids)
   const allowedChannelOrgsSet = new Set(orgs)
 
   const channelFilterFunction = (channel: Channel) => {

@@ -1,7 +1,5 @@
 import Shimmer from "@/components/GenericComponents/Shimmer/Shimmer"
 import { Channel } from "@/lib/pocketbase/pocketbase"
-import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 interface VTuberBadgeProps {
     channel?: Channel

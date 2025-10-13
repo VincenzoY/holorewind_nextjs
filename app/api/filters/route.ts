@@ -7,13 +7,13 @@ export async function POST(request: Request) {
 
   const { channelIds, includedData } = body as {
     channelIds: string[]
-    includedData: RewindFilterDataType["includedData"]
+    includedData: RewindFilterDataType["included_data"]
   }
 
-  // Validate includedData exists and is the correct type
+  // Validate included_data exists and is the correct type
   if (!includedData || !["all", "music", "video"].includes(includedData)) {
     return Response.json(
-      { error: "includedData must be one of: 'all', 'music', or 'video'" },
+      { error: "included_data must be one of: 'all', 'music', or 'video'" },
       { status: 400 }
     )
   }
@@ -29,9 +29,9 @@ export async function POST(request: Request) {
   const filterRecord = await withLoggedInSession(async () => {
     return await pb.createRecordInCollection<FiltersDBEntry>("filters", {
       filter_data: {
-        includedData,
+        included_data: includedData,
         orgs: [],
-        channelIds,
+        channel_ids: channelIds,
       }
     })
   })
