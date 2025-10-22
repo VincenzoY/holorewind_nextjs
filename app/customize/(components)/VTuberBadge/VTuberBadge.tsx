@@ -1,5 +1,6 @@
 import Shimmer from "@/components/GenericComponents/Shimmer/Shimmer"
 import { Channel } from "@/lib/pocketbase/pocketbase"
+import Image from "next/image"
 
 interface VTuberBadgeProps {
     channel?: Channel
@@ -43,7 +44,7 @@ const ChannelImage = ({ channel }: {channel?: Channel}) => {
     }
 
     return (
-        <img src={`https://holodex.net/statics/channelImg/${channel.channel_id}/50.png`} className={`${sharedClassNames} line-clamp-1`} alt={`Photo for ${channel?.name}`}/>
+        <Image width={50} height={50} src={channel.photo} className={`${sharedClassNames} line-clamp-1`} alt={`Photo for ${channel?.name}`}/>
     )
 }
 
