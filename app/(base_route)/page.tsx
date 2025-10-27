@@ -6,6 +6,8 @@ import { PrivacyPolicyFooter } from "@/components/RewindComponents/Drawers/Priva
 import { getCurrentRewindYear } from "@/lib/utils/utils";
 import Link from "next/link";
 import Image from "next/image";
+import Sand from '@/public/2025/main_background/sand.png'
+import Stopwatch from '@/public/2025/main_background/stopwatch.png'
 
 export default function Page() {
   return (
@@ -28,14 +30,14 @@ const BackgroundImage = () => {
   return (
     <div className="fixed inset-0 -z-10 bg-black">
       <Image 
-        src="/2025/main_background/sand.png"
+        src={Sand}
         alt="Sand Background"
         fill
         className="object-cover opacity-60 -z-20"
         priority
       />
       <Image 
-        src="/2025/main_background/stopwatch.png"
+        src={Stopwatch}
         alt="Amelia Watson's Stopwatch"
         fill
         className="object-cover"
