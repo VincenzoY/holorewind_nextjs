@@ -20,6 +20,12 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
                         </Link>
                     </p>
                     <p className="text-md">
+                        Thanks to {" "} 
+                        <Link href="https://x.com/Anonamos_701" target="blank">
+                            @advarcher
+                        </Link> for the cool background art!
+                    </p>
+                    <p className="text-md">
                         This site was inspired by Anthony Teo&apos;s {" "}
                         <Link href="https://videorecap.viewodyssey.com/" target="blank">
                             Video Recap for YouTube

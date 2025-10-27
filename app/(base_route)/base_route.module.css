@@ -1,0 +1,12 @@
+@keyframes testing {
+  0% {
+    transform: translate(20px, 0)
+  }
+  100% {
+    transform: translate(-20px, 0)
+  }
+}
+
+.mirage {
+  animation: testing 3s ease-in-out 0s infinite alternate;
+}
