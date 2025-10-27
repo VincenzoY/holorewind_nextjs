@@ -6,7 +6,6 @@ import { PrivacyPolicyFooter } from "@/components/RewindComponents/Drawers/Priva
 import { getCurrentRewindYear } from "@/lib/utils/utils";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 export default function Page() {
   return (
@@ -23,13 +22,6 @@ export default function Page() {
       <BackgroundImage />
     </div>
   )
-}
-
-const goToCreatePage = () => {
-  const router = useRouter()
-
-
-
 }
 
 const BackgroundImage = () => {
