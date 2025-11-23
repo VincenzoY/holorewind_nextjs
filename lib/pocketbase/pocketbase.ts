@@ -61,7 +61,7 @@ export interface TypedPocketBase extends PocketBase {
     collection(idOrName: 'filters'): RecordService<FiltersDBEntry>
 }
 
-export const PAGE_SIZE = 100;
+export const PAGE_SIZE = 64;
 
 export class PocketBaseWrapper {
     static POCKETBASE_ADDRESS = process.env.NEXT_PUBLIC_POCKETBASE_ADDRESS;
