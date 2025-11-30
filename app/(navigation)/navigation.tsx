@@ -9,10 +9,26 @@ import Logo from "@/components/Icons/Logo/Logo"
 import CreditsDrawer from "@/components/RewindComponents/Drawers/CreditsDrawer/CreditsDrawer"
 import HelpDrawer from "@/components/RewindComponents/Drawers/HelpDrawer/HelpDrawer"
 import NavDrawer from "@/components/RewindComponents/Drawers/NavDrawer/NavDrawer"
+import { useLocalStorage } from "@/lib/hooks/useLocalStorage"
 import NiceModal from "@ebay/nice-modal-react"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+
+const useHasRewindData = () => {
+  const [rewindId] = useLocalStorage<string>("rewindId")
+  const [rewindData] = useLocalStorage("rewindData")
+
+  return !!rewindId || !!rewindData
+}
 
 export default function Navigation() {
+    const hasRewindData = useHasRewindData()
+
+     const [isClient, setIsClient] = useState(false)
+ 
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
     return (
         <header className="fixed top-0 left-0 right-0 z-10">
@@ -30,16 +46,11 @@ export default function Navigation() {
                         <Link href="/" className="w-24">
                             <Logo />
                         </Link>
-                        <Link href="/">
+                        {isClient && hasRewindData && <Link href="/rewind">
                             <Button>
-                                Home
+                                My Rewind
                             </Button>
-                        </Link>
-                        <Link href="/rewind">
-                            <Button>
-                                2024 Rewind
-                            </Button>
-                        </Link>
+                        </Link>}
                     </div>
                 </div>
                 <div>

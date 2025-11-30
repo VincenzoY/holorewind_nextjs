@@ -1,4 +1,5 @@
-import pb, { Channel, RewindDBEntry, StatsDBEntry, Video, VideoDBEntry, ChannelDBEntry } from "./pocketbase"
+import { RewindFilterID } from "../rewind/filterWatchHistory/filterWatchHistory"
+import pb, { Channel, RewindDBEntry, StatsDBEntry, Video, VideoDBEntry, ChannelDBEntry, FiltersDBEntry, PocketBaseWrapper } from "./pocketbase"
 
 
 export async function fetchVideoByVideoIds(videoIds: Array<string>): Promise<Record<string, Video>> {
@@ -45,4 +46,17 @@ export function getRewindPhotoUrl(record: RewindDBEntry, filename: string) {
 
 export async function createRewindCreationStat(): Promise<StatsDBEntry> {
     return await pb.createRecordInCollection<StatsDBEntry>('stats', {stat_type: 'created_rewind'})
+}
+
+export const getFilterDataFromExistingFilter = async (filterId: RewindFilterID) => {
+  const filterRecord = await pb.fetchRecordFromCollectionById<FiltersDBEntry>("filters", filterId)
+
+  return filterRecord.filter_data
+}
+
+export async function searchChannels(page: number = 1, name?: string, org?: string, group?: string) {
+    return await pb.basePocketBase.collection<Channel>("channels").getList(page, PocketBaseWrapper.PAGE_SIZE, {
+        filter: `name~"${name}"&&org~"${org}"&&group~"${group}"`,
+        sort: 'name'
+    })
 }

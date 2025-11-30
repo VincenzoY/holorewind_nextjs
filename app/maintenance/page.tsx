@@ -8,7 +8,7 @@ export default function Page() {
             <h6 className="text-2xl md:text-4xl">We&apos;re undergoing maintenance</h6>
             <p className="text-xl md:text-2xl">See{" "}
               <Link href="https://x.com/yuyu933933" target="blank">
-                @yuyu933933
+                @yuyu
               </Link>{" "}
               for updates
             </p>

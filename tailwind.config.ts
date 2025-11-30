@@ -15,6 +15,12 @@ const config: Config = {
         "ame-brown": "#80534E",
         "ame-gold": "#F6CA77"
       },
+      keyframes: {
+        shimmer: {
+          '0%': { 'background-position-x': '0%'},
+          '100%': { 'background-position-x': '400%'}
+        }
+      }
     },
   },
   plugins: [],

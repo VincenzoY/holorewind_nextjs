@@ -19,7 +19,7 @@ export default function ChannelDetailListFile({
 }: ChannelDetailListFileProps) {
 
     return (
-        <div className="aspect-[8.5/11] bg-[#f4f6f8] w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-1">
+        <div className="aspect-[8.5/11] bg-[#f4f6f8] w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-1 rounded-sm">
             <h2 className="text-xl font-bold">{title}</h2>
             <div className="flex flex-col overflow-hidden flex-wrap">
                 {channelDetailList.map((channelDetails, index) => <ChannelListItem key={channelDetails.channel_id} index={index} channelDetails={channelDetails} keyToDisplayString={keyToDisplayString}/>)}

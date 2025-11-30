@@ -36,7 +36,7 @@ const LeftDrawer: React.FC<LeftDrawerProps> = ({
                 >
                     <div 
                         className={`
-                            w-[390px] h-full absolute top-0 bg-[#0F0F0F] z-30
+                            w-[390px] h-full absolute top-0 bg-[#181818] z-30
                             transition-all duration-300 ease-in-out
                             ${stateType(state) === "enter" ? "left-0" : "left-[-390px]"}
                         `}

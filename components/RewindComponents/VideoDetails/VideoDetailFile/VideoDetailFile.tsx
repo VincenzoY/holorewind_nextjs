@@ -41,13 +41,13 @@ export default function VideoDetailFile({
 
 
     return (
-        <div className="aspect-[8.5/11] bg-page-white w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-2">
+        <div className="aspect-[8.5/11] bg-page-white w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-2 rounded-sm">
             <div>
                 <div className={`border-2 ${placementBorderColour} border-solid p-1 rounded-sm inline-block float-right ml-2`}>
                     <a href={`https://www.youtube.com/channel/${channel.channel_id}`} target="_blank">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img 
-                            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/100.png`}
+                            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/200.png`}
                             className="w-20 h-20 line-clamp-3" alt={`Photo for ${channel.name}`}
                         />
                     </a>

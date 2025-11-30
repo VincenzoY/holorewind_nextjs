@@ -15,12 +15,20 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                     <p className="text-md">
                         If you have any issues/comments, send me a message {" "}
                         <Link href="https://x.com/yuyu933933" target="blank">
-                            @yuyu933933
+                            @yuyu
                         </Link> and I&apos;ll try to help you out.
                     </p>
                     <p className="text-md">
+                        TLDR: watch time is the most accurate for a person who watches one video at a time and either watches a video to the end 
+                        or clicks a different YouTube video when finished watching a video partways. 
+                        The less similar you are to this person, the less accurate your watch time data will be.
+                        There is also a randomness portion on how accurate the data from YouTube is. It may be missing large swathes of videos (eg. a few consecutive months).
+                        Since I have no control over YouTube, I cannot improve this. You may be able to get more info by trying again later as they do have the data
+                        (assuming you didn&apos;t clear it). It just will sometimes not be included in the export.
+                    </p>
+                    <p className="text-md">
                         If you find you have no watch data, it is possible you are logged in as the wrong account on 
-                        Google Takeout. It might also be possible that your history is stored under a brand account; in 
+                        Google Takeout. It might also be possible that your history is e a stored under a brand account; in 
                         which case you should login under that account in Google Takeout.
                     </p>
                     <p className="text-md">
@@ -38,11 +46,6 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                         to watching the new video).
                         There&apos;s some extra stuff I calculate to try to be more accurate but that&apos;s the general idea
                         (It should hopefully be a good enough approximation).
-                    </p>
-                    <p className="text-md">
-                        TLDR: watch time is the most accurate for a person who, when they click on a video, watches it in its
-                        entirety without clicking on any other videos in between. There is also a small randomness portion on how
-                        accurate the data from YouTube is. The less similar you are to this person, the less accurate your watch time data will be.
                     </p>
                 </div>
             </div>

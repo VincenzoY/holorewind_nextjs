@@ -64,15 +64,8 @@ table {
 }
 
 :root {
-  --background: #121212;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --foreground: black;
-  }
+  --background: #181818;
+  --foreground: #181818;
 }
 
 body {

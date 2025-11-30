@@ -2,10 +2,7 @@ import LeftDrawer from "@/components/GenericComponents/LeftDrawer/LeftDrawer"
 import Link from "@/components/GenericComponents/Link/Link"
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
 
-interface PrivacyPolicyDrawerProps {
-}
-
-const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
+const PrivacyPolicyDrawer = NiceModal.create(() => {
     const modal = useModal()
 
     return (
@@ -14,7 +11,7 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
             <div className="flex flex-col gap-4 text-md">
                 <p>
                   HoloRewind was created by {" "}
-                  <Link href="https://x.com/yuyu933933" target="blank">@yuyu933933</Link>.
+                  <Link href="https://x.com/yuyu933933" target="blank">@yuyu</Link>.
                   This site is in no way affiliated with either YouTube or Cover Corp.
                 </p>
                 <p>
@@ -81,13 +78,22 @@ const PrivacyPolicyDrawer: React.FC<PrivacyPolicyDrawerProps> = () => {
                 </p>
                 <p>
                   If you have any questions or concerns about the handling of privacy data on this site, 
-                  contact me by sending a message to @yuyu933933 on Twitter.
+                  contact me by sending a message to <Link href="https://x.com/yuyu933933" target="blank">
+                    @yuyu
+                  </Link>  on Twitter.
                 </p>
             </div>
         </div>
       </LeftDrawer>
     )
+})
+
+export default PrivacyPolicyDrawer
+
+export function PrivacyPolicyFooter() {
+  return (
+    <div className="fixed bottom-0 left-0 bg-page-white px-2 py-1 rounded-sm text-xs md:text-sm">
+      By using this site you agree to our <Link onClick={() => NiceModal.show(PrivacyPolicyDrawer)}>Privacy Policy</Link>
+    </div>
+  )
 }
-
-
-export default NiceModal.create(PrivacyPolicyDrawer)

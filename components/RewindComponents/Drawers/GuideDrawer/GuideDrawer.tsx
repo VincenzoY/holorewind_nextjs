@@ -74,7 +74,7 @@ const GuideDrawer: React.FC<GuideDrawerProps> = () => {
                     <p className="text-md">
                         Unzip the download and find `watch-history.json` under the file path
                         `Takeout/YouTube and YouTube Music/history/watch-history.json`. Upload this
-                        file to the `Upload Watch History` Button.
+                        file to the Upload Watch History section.
                     </p>
                 </div>
             </div>
