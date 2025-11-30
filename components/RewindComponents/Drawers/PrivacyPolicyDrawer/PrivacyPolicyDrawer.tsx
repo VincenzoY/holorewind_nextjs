@@ -11,7 +11,7 @@ const PrivacyPolicyDrawer = NiceModal.create(() => {
             <div className="flex flex-col gap-4 text-md">
                 <p>
                   HoloRewind was created by {" "}
-                  <Link href="https://x.com/yuyu933933" target="blank">@yuyu933933</Link>.
+                  <Link href="https://x.com/yuyu933933" target="blank">@yuyu</Link>.
                   This site is in no way affiliated with either YouTube or Cover Corp.
                 </p>
                 <p>
@@ -78,7 +78,9 @@ const PrivacyPolicyDrawer = NiceModal.create(() => {
                 </p>
                 <p>
                   If you have any questions or concerns about the handling of privacy data on this site, 
-                  contact me by sending a message to @yuyu933933 on Twitter.
+                  contact me by sending a message to <Link href="https://x.com/yuyu933933" target="blank">
+                    @yuyu
+                  </Link>  on Twitter.
                 </p>
             </div>
         </div>

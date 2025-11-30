@@ -20,7 +20,7 @@ export default function VideoDetailListFile({
     keyToDisplayString
 }: VideoDetailListFileProps) {
     return (
-        <div className="aspect-[8.5/11] bg-[#f4f6f8] w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-1">
+        <div className="aspect-[8.5/11] bg-[#f4f6f8] w-[22.4rem] h-[29rem] p-[2.6rem] flex flex-col gap-1 rounded-sm">
             {title && <h2 className="text-xl font-bold">{title}</h2>}
             <div className="flex flex-col overflow-hidden flex-wrap">
                 {videoDetailList.map((videoDetails, index) => <VideoListItem key={videoDetails.video_id} index={index} videoDetails={videoDetails} keyToDisplayString={keyToDisplayString}/>)}

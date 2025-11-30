@@ -63,21 +63,8 @@ table {
   }
 }
 
-:root {
-  --background: #121212;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #121212;
-    --foreground: black;
-  }
-}
-
 body {
-  /*color: var(--foreground);*/
-  background: var(--background);
+  background: #171717;
   font-family: Arial, Helvetica, sans-serif;
 }
 
