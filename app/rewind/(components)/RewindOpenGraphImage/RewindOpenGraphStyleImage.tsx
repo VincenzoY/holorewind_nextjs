@@ -18,7 +18,7 @@ export default function RewindOpenGraphStyleImage({rewind, channels}: RewindOpen
     const dataPerChannel: Array<{key: number, channel_id: string}> = (uniqueViewsPerChannel ?? watchTimePerChannel).slice(0, 10)
 
     return (
-        <div tw="flex h-[785px] bg-[#121212] text-[#f4f6f8] w-[1500px] p-[2.6rem]">
+        <div tw="flex h-[785px] bg-[#181818] text-[#f4f6f8] w-[1500px] p-[2.6rem]">
             <div tw="flex w-full h-full">
                 <div tw='flex flex-col justify-between'>
                     {
@@ -27,7 +27,7 @@ export default function RewindOpenGraphStyleImage({rewind, channels}: RewindOpen
 
                             return (
                                 <img 
-                                    src={`https://holodex.net/statics/channelImg/${channel.channel_id}/100.png`}
+                                    src={`https://holodex.net/statics/channelImg/${channel.channel_id}/200.png`}
                                     tw="w-52 rounded-md" alt={`Photo for ${channel.name}`}
                                     key={channel.channel_id}
                                 />
