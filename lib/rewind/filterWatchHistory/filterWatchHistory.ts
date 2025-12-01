@@ -19,7 +19,9 @@ const getFilterDataFromExistingFilter = async (filterId: RewindFilterID) => {
   return filterRecord.filter_data
 }
 
-export const getTypeFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
+export const getTypeFilterFunction = async (filter?: RewindFilterID) => {
+  if (!filter) return () => true;
+
   const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
   const { included_data } = rewindFilterData
@@ -34,7 +36,9 @@ export const getTypeFilterFunction = async (filter: RewindFilterID = DEFAULT_REW
   return typeFilterFunction
 }
 
-const getChannelFilterFunction = async (filter: RewindFilterID = DEFAULT_REWIND_FILTER) => {
+const getChannelFilterFunction = async (filter?: RewindFilterID) => {
+  if (!filter) return () => true;
+
   const rewindFilterData = await getFilterDataFromExistingFilter(filter)
 
   const { channel_ids, orgs } = rewindFilterData
