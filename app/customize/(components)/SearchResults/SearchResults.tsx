@@ -44,13 +44,13 @@ export default function SearchResults({ searchParams, toggleVTuberSelection, sel
   return (
     <div className="w-full flex flex-col items-center gap-8">
       <div className="flex w-full justify-between">
-        <TextLink onClick={deselectAll} className="text-page-white">Deselect All</TextLink>
+        <TextLink onClick={deselectAll} className="text-page-white">Deselect All Visible</TextLink>
         <div className="flex gap-4">
           <TextLink onClick={decrementPage} className="text-page-white">{"<"}</TextLink>
           <p className="text-page-white text-center text-lg">{channels.page} / {channels.totalPages}</p>
           <TextLink onClick={incrementPage} className="text-page-white">{">"}</TextLink>
         </div>
-        <TextLink onClick={selectAll} className="text-page-white">Select All</TextLink>
+        <TextLink onClick={selectAll} className="text-page-white">Select All Visible</TextLink>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
         {channels?.["items"].map((channel) => (

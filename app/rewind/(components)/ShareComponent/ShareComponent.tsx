@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import TwitterLogo from '@/components/Icons/TwitterIcon/TwitterIcon';
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 interface ShareComponentProps {
     rewindId?: string
@@ -50,6 +51,8 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
         const newWindow = window.open('https://twitter.com/yuyu933933', '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
     }
+
+    const router = useRouter()
 
     return (
         <>
@@ -98,6 +101,11 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
                                     <LinkIcon width={24} height={24}/> Share your Filter
                                 </ShareButton>
                             }
+                            <ShareButton 
+                                onClick={() => router.push('/customize')}
+                            >
+                                Customize Rewind Filters
+                            </ShareButton>
                             <ShareButton 
                                 onClick={followOnTwitter}
                             >
