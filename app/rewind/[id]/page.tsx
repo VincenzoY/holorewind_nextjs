@@ -5,14 +5,15 @@ import { notFound } from "next/navigation"
 import pb from "@/lib/pocketbase/pocketbase"
 
 export interface PageProps {
-    params: {
+    params: Promise<{
         id: string
-    }
+    }>
 }
 
 export async function generateMetadata(
-    { params: {id} }: PageProps
+    { params }: PageProps
 ): Promise<Metadata> {
+    const { id } = await params
     const { rewind: { year } } = await pb.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
    
     return {
@@ -23,7 +24,8 @@ export async function generateMetadata(
     }
 }
 
-export default async function Page({ params: { id } }: PageProps) {
+export default async function Page({ params }: PageProps) {
+    const { id } = await params
     return <RewindComponentByID id={id}/>
 }
 

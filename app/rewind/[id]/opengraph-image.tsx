@@ -19,18 +19,19 @@ export const contentType = 'image/png'
 
 // Image generation
 export default async function Image(
-  { params: {id} }: PageProps
+  { params }: PageProps
 ) {
+  const { id } = await params
   const { rewind } = await pb.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id).catch(notFound)
   const dataPerChannel: Array<{key: number, channel_id: string}> = rewind.channel_unique_views ?? rewind.channel_watch_time
   const channels = await fetchChannelByChannelIds(dataPerChannel.map(item => item.channel_id))
 
   const fontRobotoRegular = fetch(
-    new URL('/app/fonts/Roboto-Regular.ttf', import.meta.url)
+    new URL('../../fonts/Roboto-Regular.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer())
 
   const fontRobotoBold = fetch(
-    new URL('./fonts/Roboto-Bold.ttf', import.meta.url)
+    new URL('../../fonts/Roboto-Bold.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
  
   return new ImageResponse(
