@@ -7,6 +7,8 @@ import { Slide } from 'react-toastify';
 import NiceModalProvider from "./(layout)/NiceModalProvider";
 import { Roboto } from 'next/font/google';
 import QueryClientContextProvider from "./(layout)/QueryClientProvider";
+import Head from "next/head";
+import Script from "next/script";
 
 const roboto = Roboto({
   weight: ['400', '700'],  // You can select weights
@@ -27,6 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script defer src="https://umami.vyee.ca/script.js" data-website-id="190dafaa-709c-44d7-b496-34058bd061b5" />
+      </head>
       <body
         className={`${roboto.className} antialiased`}
       >
