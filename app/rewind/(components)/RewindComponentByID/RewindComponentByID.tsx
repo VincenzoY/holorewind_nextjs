@@ -13,7 +13,7 @@ interface RewindComponentByIDProps {
 export default function RewindComponentByID({ id }: RewindComponentByIDProps) {
   const { isLoading, isError, data } = useQuery({ queryKey: ['fetchRecord', id], queryFn: () => pb.fetchRecordFromCollectionById<RewindDBEntry>("rewinds", id) })
 
-  if (isLoading) return <span>Loading</span>
+  if (isLoading) return <></>
 
   if (isError) return notFound()
 
