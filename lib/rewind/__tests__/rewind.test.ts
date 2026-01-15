@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { getRewindData, RewindDataOptions } from '../rewind'
+import { createRewind, RewindDataOptions } from '../rewind'
 import { promises as fs } from 'fs'
 import path from 'path'
 
-describe('getRewindData', () => {
+describe('createRewind', () => {
   it('should generate rewind data from watch history file', async () => {
     // Read the test fixture
     const watchHistoryPath = path.join(__dirname, 'watch-history.json')
@@ -14,13 +14,11 @@ describe('getRewindData', () => {
       text: () => Promise.resolve(watchHistoryContent)
     } as File
 
-    const mockFileList = [mockFile] as unknown as FileList
-
     const options: RewindDataOptions = {
       year: 2025
     }
 
-    const result = await getRewindData(mockFileList, options)
+    const result = await createRewind(mockFile, options)
 
     // Snapshot test - the exact structure will depend on your data processing
     expect(result).toMatchSnapshot()
@@ -28,14 +26,5 @@ describe('getRewindData', () => {
     // Basic structure tests
     expect(result).toBeDefined()
     expect(typeof result).toBe('object')
-  })
-
-  it('should throw error when no files provided', async () => {
-    const emptyFileList = [] as unknown as FileList
-    const options: RewindDataOptions = {
-      year: 2025,
-    }
-
-    await expect(getRewindData(emptyFileList, options)).rejects.toThrow('No file found.')
   })
 })
