@@ -11,6 +11,7 @@ import { useLocalStorage } from '@/lib/hooks/useLocalStorage';
 import TwitterLogo from '@/components/Icons/TwitterIcon/TwitterIcon';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import Image from "next/image"
 
 interface ShareComponentProps {
     rewindId?: string
@@ -128,10 +129,7 @@ const ChannelThumbnail = ({channelId}: {channelId: string}) => {
     if (!channel) return
 
     return (
-        <img 
-            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/200.png`}
-            className="w-20 h-20 line-clamp-3 rounded-sm" alt={`Photo for ${channel.name}`}
-        />
+        <Image width={200} height={200} src={channel.photo} className="line-clamp-3 rounded-sm w-20 h-20" alt={`Photo for ${channel?.name}`}/>
     )
 }
 

@@ -4,6 +4,7 @@ import FakeParagraph from "@/components/RewindComponents/FakeParagraph/FakeParag
 import { fetchChannelByChannelIds, fetchVideoByVideoIds } from "@/lib/pocketbase/utils";
 import { humanizeSeconds } from "@/lib/utils/utils";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image"
 
 interface VideoDetailFileProps {
     index?: number
@@ -45,11 +46,7 @@ export default function VideoDetailFile({
             <div>
                 <div className={`border-2 ${placementBorderColour} border-solid p-1 rounded-sm inline-block float-right ml-2`}>
                     <a href={`https://www.youtube.com/channel/${channel.channel_id}`} target="_blank">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/200.png`}
-                            className="w-20 h-20 line-clamp-3" alt={`Photo for ${channel.name}`}
-                        />
+                        <Image width={200} height={200} src={channel.photo} className="line-clamp-3 w-20 h-20" alt={`Photo for ${channel?.name}`}/>
                     </a>
                 </div>
                 <div>

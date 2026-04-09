@@ -1,6 +1,7 @@
 import FakeParagraph from "@/components/RewindComponents/FakeParagraph/FakeParagraph";
 import { fetchChannelByChannelIds } from "@/lib/pocketbase/utils";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image"
 
 interface ChannelDetailFileProps {
     index: number | undefined
@@ -34,11 +35,7 @@ export default function ChannelDetailFile({
             <div>
                 <div className={`border-2 ${placementBorderColour} border-solid p-1 rounded-sm inline-block float-right ml-2`}>
                     <a href={`https://www.youtube.com/channel/${channel.channel_id}`} target="_blank">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img 
-                            src={`https://holodex.net/statics/channelImg/${channel.channel_id}/200.png`}
-                            className="w-20 h-20 line-clamp-3" alt={`Photo for ${channel.name}`}
-                        />
+                        <Image width={200} height={200} src={channel.photo} className="line-clamp-3 rounded-sm w-20 h-20" alt={`Photo for ${channel?.name}`}/>
                     </a>
                 </div>
                 <div>
