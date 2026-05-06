@@ -7,7 +7,7 @@ export default function Page() {
           <div className="text-page-white flex flex-col gap-4">
             <h6 className="text-2xl md:text-4xl">We&apos;re undergoing maintenance</h6>
             <p className="text-xl md:text-2xl">See{" "}
-              <Link href="https://x.com/yuyu933933" target="blank">
+              <Link href="https://x.com/vincen2o_" target="blank">
                 @yuyu
               </Link>{" "}
               for updates

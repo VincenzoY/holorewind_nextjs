@@ -49,7 +49,7 @@ export default function ShareComponent({ rewindId: rewindIdParam }: ShareCompone
     }
 
     const followOnTwitter = () => {
-        const newWindow = window.open('https://twitter.com/yuyu933933', '_blank', 'noopener,noreferrer')
+        const newWindow = window.open('https://twitter.com/vincen2o_', '_blank', 'noopener,noreferrer')
         if (newWindow) newWindow.opener = null
     }
 

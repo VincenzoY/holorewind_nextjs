@@ -14,7 +14,7 @@ const HelpDrawer: React.FC<HelpDrawerProps> = () => {
                 <div className="flex flex-col gap-4">
                     <p className="text-md">
                         If you have any issues/comments, send me a message {" "}
-                        <Link href="https://x.com/yuyu933933" target="blank">
+                        <Link href="https://x.com/vincen2o_" target="blank">
                             @yuyu
                         </Link> and I&apos;ll try to help you out.
                     </p>

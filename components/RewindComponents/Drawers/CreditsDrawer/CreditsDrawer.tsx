@@ -42,7 +42,7 @@ const CreditsDrawer: React.FC<CreditsDrawerProps> = () => {
                     </p>
                     <p className="text-md">
                         Made by {" "}
-                        <Link href="https://x.com/yuyu933933" target="blank">
+                        <Link href="https://x.com/vincen2o_" target="blank">
                             @yuyu
                         </Link>.
                         (You should go follow me :D) 
